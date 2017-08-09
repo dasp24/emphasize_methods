@@ -6,14 +6,16 @@ _.first = (arr, n = 1) => {
         else return [];
     }
     else {
+        if (typeof arr === 'string') arr = arr.split('');
         if (Array.isArray(arr)) return arr.slice(0,n);
-        if (typeof arr === 'string') return arr.split('').slice(0,n);
+        else return [];
     }
 };
 
 _.initial = (arr) => {
-    return arr.slice(0,-1);
-
+    if (typeof arr === 'string') arr = arr.split('');
+    if (Array.isArray(arr)) return arr.slice(0,-1);
+    else return [];
 };
 
 if (typeof module !== 'undefined') {
