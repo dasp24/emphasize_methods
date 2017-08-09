@@ -14,8 +14,12 @@ describe('_', () => {
             expect(_.first).to.be.a('function');
         });
         it('returns the first value of an array', () => {
-            const arr = [1,2,3];
+            const arr = [1, 2, 3];
             expect(_.first(arr)).to.equal(1);
+        });
+        it('returns the first char of a string', () => {
+            const str = 'hello';
+            expect(_.first(str)).to.equal('h');
         });
     });
 });
