@@ -40,5 +40,13 @@ describe('_', () => {
             const str = 'holla';
             expect(_.first(str, 2)).to.eql(['h', 'o']);
         });
+        it('works with some edge cases', () => {
+            const str = 'holla';
+            const arr = [1,2,3];
+            expect(_.first(str, 0)).to.eql([]);
+            expect(_.first(arr, 0)).to.eql([]);
+            const arr2 = [3,7,11,99];
+            expect(_.first(arr2, 5)).to.eql([3,7,11,99]);
+        });
     });
 });
