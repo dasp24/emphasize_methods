@@ -80,7 +80,11 @@ describe('_', () => {
         });
         it('returns an arr without last n elements', () => {
             const arr = [1, 2, 3];
-            expect(_.initial(arr,2)).to.eql([1]);
+            expect(_.initial(arr, 2)).to.eql([1]);
+        });
+        it('returns a str without last n elements', () => {
+            const str = 'boom';
+            expect(_.initial(str, 2)).to.eql(['b','o']);
         });
     });
 });

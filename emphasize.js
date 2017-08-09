@@ -12,14 +12,9 @@ _.first = (arr, n = 1) => {
 };
 
 _.initial = (arr, n = 1) => {
-    if (n === 1) {
-        if (typeof arr === 'string') arr = arr.split('');
-        if (Array.isArray(arr)) return arr.slice(0, -1);
-        else return [];
-    }
-    else {
-        return arr.slice(0, -n)
-    }
+    if (typeof arr === 'string') arr = arr.split('');
+    if (Array.isArray(arr)) return arr.slice(0, -n);
+    else return [];
 };
 
 if (typeof module !== 'undefined') {
