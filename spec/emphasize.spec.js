@@ -21,5 +21,11 @@ describe('_', () => {
             const str = 'hello';
             expect(_.first(str)).to.equal('h');
         });
+        it('returns empty array if given object or number', () => {
+            const num = 123;
+            expect(_.first(num)).to.eql([]);
+            const obj = {a:1,b:2};
+            expect(_.first(obj)).to.eql([]);
+        });
     });
 });
