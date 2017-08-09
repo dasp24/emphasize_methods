@@ -24,8 +24,15 @@ describe('_', () => {
         it('returns empty array if given object or number', () => {
             const num = 123;
             expect(_.first(num)).to.eql([]);
-            const obj = {a:1,b:2};
+            const obj = {
+                a: 1,
+                b: 2
+            };
             expect(_.first(obj)).to.eql([]);
+        });
+        it('returns the first n elements if given as a second param', () => {
+            const arr = [1, 2, 3];
+            expect(_.first(arr,2)).to.eql([1,2]);
         });
     });
 });
