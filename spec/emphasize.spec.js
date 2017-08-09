@@ -30,9 +30,15 @@ describe('_', () => {
             };
             expect(_.first(obj)).to.eql([]);
         });
-        it('returns the first n elements if given as a second param', () => {
+        it('returns the first n elements if given as a second param - arr', () => {
             const arr = [1, 2, 3];
-            expect(_.first(arr,2)).to.eql([1,2]);
+            expect(_.first(arr, 2)).to.eql([1, 2]);
+            const arr2 = [1, 2, 3, 4, 5];
+            expect(_.first(arr2, 4)).to.eql([1, 2, 3, 4]);
+        });
+        it('returns the first n elements if given as a second param - str', () => {
+            const str = 'holla';
+            expect(_.first(str, 2)).to.eql(['h', 'o']);
         });
     });
 });

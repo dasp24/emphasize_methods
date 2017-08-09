@@ -7,6 +7,7 @@ _.first = (arr, n = 1) => {
     }
     else {
         if (Array.isArray(arr)) return arr.slice(0,n);
+        if (typeof arr === 'string') return arr.split('').slice(0,n);
     }
 };
 
