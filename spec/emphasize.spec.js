@@ -1,8 +1,10 @@
 const { expect } = require("chai");
-const {emphasize} = require("../emphasize");
+const path = require('path');
+const _ = require(path.join(__dirname, '..', './emphasize.js'));
 
-describe("emphasize", () => {
-it("is a function", () => {
-expect(emphasize).to.be.a("function");
-});
-});
+describe('_', function () {
+  'use strict';
+  it('is an object', function () {
+    expect(_).to.be.an('object');
+  });
+})
