@@ -1,7 +1,7 @@
 const _ = {};
 
- _.first = () =>{
-
+ _.first = (arr) =>{
+    return arr.shift();
 }
 
 if (typeof module !== 'undefined') {

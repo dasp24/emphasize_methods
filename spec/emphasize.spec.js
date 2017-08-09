@@ -13,5 +13,9 @@ describe('_', () => {
         it('exists', () => {
             expect(_.first).to.be.a('function');
         });
+        it('returns the first value of an array', () => {
+            const arr = [1,2,3];
+            expect(_.first(arr)).to.equal(1);
+        });
     });
 });
