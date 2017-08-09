@@ -13,6 +13,14 @@ _.initial = (arr, n = 1) => {
     else return [];
 };
 
+_.keys = (obj) => {
+    const result =[];
+    for (let key in obj) {
+        result.push(key)
+    }
+    return result;
+};
+
 if (typeof module !== 'undefined') {
     module.exports = _;
 }

@@ -84,7 +84,20 @@ describe('_', () => {
         });
         it('returns a str without last n elements', () => {
             const str = 'boom';
-            expect(_.initial(str, 2)).to.eql(['b','o']);
+            expect(_.initial(str, 2)).to.eql(['b', 'o']);
+        });
+    });
+    describe('_.keys', () => {
+        it('exists', () => {
+            expect(_.keys).to.be.a('function');
+        });
+        it('returns the keys to an object', () => {
+            const obj = {
+                a: 1,
+                b: 2,
+                c: 3
+            }
+            expect(_.keys(obj)).to.eql(['a','b','c']);
         });
     });
 });
