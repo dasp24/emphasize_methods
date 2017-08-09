@@ -78,5 +78,9 @@ describe('_', () => {
             expect(_.initial(num)).to.eql([]);
             expect(_.initial(obj)).to.eql([]);
         });
+        it('returns an arr without last n elements', () => {
+            const arr = [1, 2, 3];
+            expect(_.initial(arr,2)).to.eql([1]);
+        });
     });
 });
