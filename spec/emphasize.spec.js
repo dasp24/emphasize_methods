@@ -1,10 +1,17 @@
-const { expect } = require("chai");
+const {
+    expect
+} = require("chai");
 const path = require('path');
 const _ = require(path.join(__dirname, '..', './emphasize.js'));
 
-describe('_', function () {
-  'use strict';
-  it('is an object', function () {
-    expect(_).to.be.an('object');
-  });
-})
+describe('_', () => {
+    'use strict';
+    it('is an object', () => {
+        expect(_).to.be.an('object');
+    });
+    describe('_.first', () => {
+        it('exists', () => {
+            expect(_.first).to.be.a('function');
+        });
+    });
+});
