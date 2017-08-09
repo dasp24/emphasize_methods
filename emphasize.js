@@ -11,6 +11,11 @@ _.first = (arr, n = 1) => {
     }
 };
 
+_.initial = (arr) => {
+    return arr.slice(0,-1);
+
+};
+
 if (typeof module !== 'undefined') {
     module.exports = _;
 }

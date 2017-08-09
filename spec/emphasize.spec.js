@@ -42,11 +42,20 @@ describe('_', () => {
         });
         it('works with some edge cases', () => {
             const str = 'holla';
-            const arr = [1,2,3];
+            const arr = [1, 2, 3];
             expect(_.first(str, 0)).to.eql([]);
             expect(_.first(arr, 0)).to.eql([]);
-            const arr2 = [3,7,11,99];
-            expect(_.first(arr2, 5)).to.eql([3,7,11,99]);
+            const arr2 = [3, 7, 11, 99];
+            expect(_.first(arr2, 5)).to.eql([3, 7, 11, 99]);
+        });
+    });
+    describe('_.initial', () => {
+        it('exists', () => {
+            expect(_.initial).to.be.a('function');
+        });
+        it('returns arr without last elem', () => {
+            const arr = [1,2,3];
+            expect(_.initial(arr)).to.eql([1,2]);
         });
     });
 });
