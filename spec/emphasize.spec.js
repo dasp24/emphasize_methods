@@ -604,8 +604,10 @@ describe('_', () => {
             })).to.be.eql(['b', 'c', 1, 3]);
             expect(_.filter([3, 4, 1, 2])).to.be.eql([3, 4, 1, 2]);
         });
-        it('empty array returned for any number', () => {
+        it('empty array returned for any number, boolean or null', () => {
             expect(_.filter(123)).to.eql([]);
+            expect(_.filter(true)).to.eql([]);
+            expect(_.filter(null)).to.eql([]);
         });
         it('str returns correctly', () => {
             expect(_.filter('houses')).to.eql(['h', 'o', 'u', 's', 'e', 's']);
