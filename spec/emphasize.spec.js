@@ -364,10 +364,25 @@ describe('_', () => {
         it('is a function', function () {
             expect(_.identity).to.be.a('function');
         });
-        it('returns same item given', function () {
-            const arr = [1,2,3]
+        it('returns same item given - arr', function () {
+            const arr = [1,2,3];
             expect(_.identity(arr)).to.be.an('array');
             expect(_.identity(arr)).to.equal(arr);
+        });
+        it('returns same item given - num', function () {
+            const num = 123;
+            expect(_.identity(num)).to.be.a('number');
+            expect(_.identity(num)).to.equal(num);
+        });
+        it('returns same item given - str', function () {
+            const str = 'people coding';
+            expect(_.identity(str)).to.be.a('string');
+            expect(_.identity(str)).to.equal(str);
+        });
+        it('returns same item given - obj', function () {
+            const obj = {a:1,b:2}
+            expect(_.identity(obj)).to.be.an('object');
+            expect(_.identity(obj)).to.equal(obj);
         });
     });
 });
