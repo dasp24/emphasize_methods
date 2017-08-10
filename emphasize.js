@@ -164,36 +164,24 @@ _.filter = (list, predicate) => {
 };
 
 // refactor the below methods as these were old and imported
-_.range = function (arg1, arg2, arg3) {
+_.range = (arg1, arg2, arg3) => {
     const solution = [];
-    if (arg2 === undefined && arg3 === undefined) {
-        if (arg1 > 0) {
-            for (let i = 0; i < arg1; i++) {
-                solution.push(i);
-            }
-        } else if (arg1 < 0) {
-            for (let i = 0; i > arg1; i--) {
-                solution.push(i);
-            }
-        }
-    } else {
+    if (!arg2 && !arg3)
+        for (let i = 0; i < arg1; i++)
+            solution.push(i);
+    else {
         arg3 = arg3 || 1;
-        if (arg2 > arg1 && arg3 > 0) {
-            for (let i = arg1; i < arg2; i += arg3) {
+        if (arg2 > arg1 && arg3 > 0)
+            for (let i = arg1; i < arg2; i += arg3)
                 solution.push(i);
-            }
-        } else if (arg2 < arg1 && arg3 < 0) {
-            for (let i = arg1; i > arg2; i += arg3) {
+        else if (arg2 < arg1 && arg3 < 0)
+            for (let i = arg1; i > arg2; i += arg3)
                 solution.push(i);
-            }
-        } else {
-            return solution;
-        }
     }
     return solution;
 };
 
-_.where = function (list, properties) {
+_.where = (list, properties) => {
     return _.filter(list, function (obj) {
         return includesProperties(obj, properties);
     });

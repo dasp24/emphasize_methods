@@ -638,11 +638,13 @@ describe('_', () => {
             expect(_.range(10)).to.eql([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
             expect(_.range(5)).to.eql([0, 1, 2, 3, 4]);
             expect(_.range(7)).to.eql([0, 1, 2, 3, 4, 5, 6]);
+            expect(_.range(-5)).to.eql([]);
         });
         it('should create the correct range between a start and stop value if passed 2 arguments', () => {
             expect(_.range(1, 11)).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
             expect(_.range(2, 5)).to.eql([2, 3, 4]);
             expect(_.range(10, 15)).to.eql([10, 11, 12, 13, 14]);
+            expect(_.range(1, -9)).to.eql([]);
         });
         it('should use the step if provided as a third argument', () => {
             expect(_.range(2, 10, 2)).to.eql([2, 4, 6, 8]);
