@@ -94,6 +94,22 @@ _.identity = (input) => {
     return input;
 };
 
+_.toArray = (list) => {
+  const result = [];
+  if (Array.isArray(list)) return list;
+  if (typeof list === 'object') {
+    for (let key in list) {
+      result.push(list[key]);
+    }
+  }
+  if (typeof list === 'string') {
+    for (let i = 0; i < list.length; i++) {
+      result.push(list[i]);
+    }
+  }
+  return result;
+};
+
 if (typeof module !== 'undefined') {
     module.exports = _;
 }

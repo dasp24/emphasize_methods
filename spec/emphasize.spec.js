@@ -385,4 +385,35 @@ describe('_', () => {
             expect(_.identity(obj)).to.equal(obj);
         });
     });
+    describe('.toArray', function () {
+        it('is a function', function () {
+            expect(_.toArray).to.be.a('function');
+        });
+        it('array just get returned', () => {
+        const list = [1, 2, 3, 4];
+            expect(_.toArray(list)).to.equal(list);
+        const list2 = [
+            [1, 2, 3, 4], {
+            a: 1,
+            b: 2
+            }
+        ];
+            expect(_.toArray(list2)).to.equal(list2);
+        });
+        it('returns an array for an object', () => {
+        const list = {
+            a: 1,
+            2: 'b'
+        };
+            expect(_.toArray(list)).to.eql(['b', 1]);
+        });
+        it('returns an array for a string', () => {
+        const list = 'hello';
+            expect(_.toArray(list)).to.eql(['h', 'e', 'l', 'l', 'o']);
+        });
+        it('returns empty array if not a list', () => {
+        const list = 1234;
+            expect(_.toArray(list)).to.eql([]);
+        });
+    });
 });
