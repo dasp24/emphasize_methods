@@ -30,7 +30,16 @@ _.values = (obj) => {
             result.push(obj[key]);
         }
     return result;
+};
 
+_.each = (list, iteratee) => {
+    if (typeof(list) === 'number') return list;
+    if (Array.isArray(list)) {
+        for (let i = 0; i < list.length; i++) {
+            iteratee(list[i])
+        }
+    }
+    return list;
 };
 
 if (typeof module !== 'undefined') {

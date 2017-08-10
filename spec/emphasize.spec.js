@@ -130,4 +130,22 @@ describe('_', () => {
             expect(_.values('hello')).to.eql([]);
         });
     });
+    describe('_.each', () => {
+        it('exists', () => {
+            expect(_.each).to.be.a('function');
+        });
+        it('returns a number if given as first arg', () => {
+            expect(_.each(123)).to.equal(123);
+        });
+        it('make sure it goes over each item given', () => {
+            const arr = [1, 2, 3];
+            let count = 0;
+
+            function counter() {
+                return count++;
+            }
+            expect(_.each(arr,counter)).to.equal(arr);
+            expect(count).to.equal(arr.length);
+        });
+    });
 });
