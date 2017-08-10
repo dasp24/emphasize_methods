@@ -22,7 +22,13 @@ _.keys = (obj) => {
     return result;
 };
 
-_.values = () => {
+_.values = (obj) => {
+    const result = [];
+    if (typeof obj === 'object')
+        for (let key in obj) {
+            result.push(obj[key]);
+        }
+    return result;
 
 };
 

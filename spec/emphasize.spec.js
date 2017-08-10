@@ -112,5 +112,13 @@ describe('_', () => {
         it('exists', () => {
             expect(_.values).to.be.a('function');
         });
+        it('returns the keys to an object', () => {
+            const obj = {
+                a: 1,
+                b: 2,
+                c: 3
+            };
+            expect(_.values(obj)).to.eql([1, 2, 3]);
+        });
     });
 });
