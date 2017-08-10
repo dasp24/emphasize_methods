@@ -360,33 +360,33 @@ describe('_', () => {
             
         });
     });
-        describe('_.identity', function () {
-        it('is a function', function () {
+        describe('_.identity', () => {
+        it('is a function', () => {
             expect(_.identity).to.be.a('function');
         });
-        it('returns same item given - arr', function () {
+        it('returns same item given - arr', () => {
             const arr = [1,2,3];
             expect(_.identity(arr)).to.be.an('array');
             expect(_.identity(arr)).to.equal(arr);
         });
-        it('returns same item given - num', function () {
+        it('returns same item given - num', () => {
             const num = 123;
             expect(_.identity(num)).to.be.a('number');
             expect(_.identity(num)).to.equal(num);
         });
-        it('returns same item given - str', function () {
+        it('returns same item given - str', () => {
             const str = 'people coding';
             expect(_.identity(str)).to.be.a('string');
             expect(_.identity(str)).to.equal(str);
         });
-        it('returns same item given - obj', function () {
+        it('returns same item given - obj', () => {
             const obj = {a:1,b:2}
             expect(_.identity(obj)).to.be.an('object');
             expect(_.identity(obj)).to.equal(obj);
         });
     });
-    describe('.toArray', function () {
-        it('is a function', function () {
+    describe('.toArray', () => {
+        it('is a function', () => {
             expect(_.toArray).to.be.a('function');
         });
         it('array just get returned', () => {
@@ -417,14 +417,14 @@ describe('_', () => {
         });
     });
     
-    describe('_.partition', function () {
-    it('is a function', function () {
+    describe('_.partition', () => {
+    it('is a function', () => {
       expect(_.partition).to.be.a('function');
     });
-    it('takes to args - array and predicate', function () {
+    it('takes to args - array and predicate', () => {
       expect(_.partition.length).to.equal(2);
     });
-    it('if no predicate, returns array-if iterable', function () {
+    it('if no predicate, returns array-if iterable', () => {
       expect(_.partition('hello')).to.eql([
         ['h', 'e', 'l', 'l', 'o'],
         []
@@ -434,7 +434,7 @@ describe('_', () => {
         []
       ]);
     });
-    it('returns two array depending on func for array and obj', function () {
+    it('returns two array depending on func for array and obj', () => {
       const isOdd = (x) => {
         if (x % 2 !== 0) return x;
       };
@@ -452,7 +452,7 @@ describe('_', () => {
         [2, 4]
       ]);
     });
-    it('works for a string', function () {
+    it('works for a string', () => {
       const big = (x) => {
         if (x > 'h') return x;
       };
@@ -461,5 +461,10 @@ describe('_', () => {
         ['h', 'e']
       ]);
     });
+  });
+  describe('_.random', () => {
+      it('exists',() => {
+        expect(_.random).to.be.a('function');
+      });
   });
 });

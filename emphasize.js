@@ -126,6 +126,10 @@ _.partition = (array, predicate) => {
   return [firstArray, secondArray];
 };
 
+_.random = () => {
+
+};
+
 if (typeof module !== 'undefined') {
     module.exports = _;
 }
