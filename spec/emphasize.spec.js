@@ -355,6 +355,9 @@ describe('_', () => {
         });
         it('takes a second argument, if true only flattens once', () => {
             expect(_.flatten([1,[[2]],[3],'hello'],true)).to.eql([1, [2], 3, 'hello']);
+            expect(_.flatten([1,[[[2]]],[[3]],'hello'],[1,2,3])).to.eql([1, [[2]], [3], 'hello']);
+            expect(_.flatten([1,[34,[2,3],['hello']]], true)).to.eql([1,34,[2,3],['hello']]);
+            
         });
     });
 });
