@@ -110,6 +110,22 @@ _.toArray = (list) => {
   return result;
 };
 
+_.partition = (array, predicate) => {
+  if (!Array.isArray(array)) {
+    array = _.toArray(array);
+  }
+  if (!predicate) return [array, []];
+  const firstArray = [];
+  const secondArray = [];
+  for (let i = 0; i < array.length; i++) {
+    if (predicate(array[i])) firstArray.push(array[i]);
+    else {
+      secondArray.push(array[i]);
+    }
+  }
+  return [firstArray, secondArray];
+};
+
 if (typeof module !== 'undefined') {
     module.exports = _;
 }

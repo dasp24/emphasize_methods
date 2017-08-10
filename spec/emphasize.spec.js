@@ -416,4 +416,50 @@ describe('_', () => {
             expect(_.toArray(list)).to.eql([]);
         });
     });
+    
+    describe('_.partition', function () {
+    it('is a function', function () {
+      expect(_.partition).to.be.a('function');
+    });
+    it('takes to args - array and predicate', function () {
+      expect(_.partition.length).to.equal(2);
+    });
+    it('if no predicate, returns array-if iterable', function () {
+      expect(_.partition('hello')).to.eql([
+        ['h', 'e', 'l', 'l', 'o'],
+        []
+      ]);
+      expect(_.partition([1, 2, 3, 4, 5])).to.eql([
+        [1, 2, 3, 4, 5],
+        []
+      ]);
+    });
+    it('returns two array depending on func for array and obj', function () {
+      const isOdd = (x) => {
+        if (x % 2 !== 0) return x;
+      };
+      expect(_.partition([1, 2, 3], isOdd)).to.eql([
+        [1, 3],
+        [2]
+      ]);
+      expect(_.partition({
+        a: 1,
+        b: 2,
+        c: 3,
+        d: 4
+      }, isOdd)).to.eql([
+        [1, 3],
+        [2, 4]
+      ]);
+    });
+    it('works for a string', function () {
+      const big = (x) => {
+        if (x > 'h') return x;
+      };
+      expect(_.partition('hello', big)).to.eql([
+        ['l', 'l', 'o'],
+        ['h', 'e']
+      ]);
+    });
+  });
 });
