@@ -23,6 +23,7 @@ _.keys = (obj) => {
 };
 
 _.values = (obj) => {
+    if (Array.isArray(obj)) return obj;
     const result = [];
     if (typeof obj === 'object')
         for (let key in obj) {

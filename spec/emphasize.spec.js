@@ -120,5 +120,14 @@ describe('_', () => {
             };
             expect(_.values(obj)).to.eql([1, 2, 3]);
         });
+        it('returns array', () => {
+            const arr = ['a', 4, [32]];
+            expect(_.values(arr)).to.equal(arr);
+            expect(_.values(['hello', 56, 'boom'])).to.eql(['hello', 56, 'boom']);
+        });
+        it('returns empty array for num or string', () => {
+            expect(_.values(123)).to.eql([]);
+            expect(_.values('hello')).to.eql([]);
+        });
     });
 });
