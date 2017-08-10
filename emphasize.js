@@ -163,7 +163,6 @@ _.filter = (list, predicate) => {
     return result;
 };
 
-// refactor the below methods as these were old and imported
 _.range = (arg1, arg2, arg3) => {
     const solution = [];
     if (!arg2 && !arg3)
@@ -181,6 +180,7 @@ _.range = (arg1, arg2, arg3) => {
     return solution;
 };
 
+// refactor the below methods as these were old and imported
 _.where = (list, properties) => {
     return _.filter(list, function (obj) {
         return includesProperties(obj, properties);
@@ -196,27 +196,22 @@ function includesProperties(obj, properties) {
 
 _.reject = (list, predicate) => {
     const result = [];
-    if (list.length === 0 || typeof list === 'number' || Object.keys(list).length === 0) {
-        return result;
+    if (!predicate) return result;
+    if (Array.isArray(list) || typeof list === 'string') {
+        for (let i = 0; i < list.length; i++) 
+            if (!predicate(list[i])) 
+                result.push(list[i]);
     }
-
-    for (let i = 0; i < list.length; i++) {
-        if (!predicate(list[i])) {
-            result.push(list[i]);
-        }
-    }
-
-    if (typeof list === 'object' && !Array.isArray(list)) {
-        for (let key in list) {
-            if (!predicate(list[key])) {
+    else if (typeof list === 'object') {
+        for (let key in list) 
+            if (!predicate(list[key])) 
                 result.push(list[key]);
-            }
-        }
     }
     return result;
 };
 
 _.uniq = (array) => {
+    if (typeof array === 'object' && !Array.isArray(array) || typeof array === 'number') return [];
     return array.reduce((acc, x) => {
         if (acc.indexOf(x) === -1) acc.push(x);
         return acc;

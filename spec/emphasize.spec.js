@@ -625,11 +625,13 @@ describe('_', () => {
             }, moreThenFour)).to.eql([5, 10]);
         });
         it('only returns items that satisfy predicate - str', () => {
-            const isUpperCase = (x) => {if (x === x.toUpperCase()) return x};
+            const isUpperCase = (x) => {
+                if (x === x.toUpperCase()) return x
+            };
             expect(_.filter('HellO', isUpperCase)).to.eql(['H', 'O']);
         });
     });
-  // double check these tests
+
     describe('_.range', () => {
         it('should be a function', () => {
             expect(_.range).to.be.a('function');
@@ -663,6 +665,7 @@ describe('_', () => {
         });
     });
 
+    // double check these tests
     describe('_.where', () => {
         it('should be a function', () => {
             expect(_.where).to.be.a('function');
@@ -775,26 +778,29 @@ describe('_', () => {
         it('is a function', () => {
             expect(_.reject).to.be.a('function');
         });
-        it('returns an empty array if the list paramater is empty or the list is one number', function () {
-            expect(_.reject([])).to.be.eql([]);
-            expect(_.reject({})).to.be.eql([]);
-            expect(_.reject(1)).to.be.eql([]);
+        it('returns an empty array if no predicate', () => {
             expect(_.reject(6767)).to.be.eql([]);
-            expect(_.reject('')).to.be.eql([]);
+            expect(_.reject({
+                a: 1
+            })).to.be.eql([]);
+            expect(_.reject([1, 2, 3])).to.be.eql([]);
+            expect(_.reject('boom')).to.be.eql([]);
         });
-        it('return an array subject to conditions in predicate', () => {
-            expect(_.reject([1, 2, 3], (x) => {
-                return x >= 2;
-            })).to.be.eql([1]);
+        it('return an array subject to conditions in predicate - arr', () => {
+            const twoOrMore = x => x >= 2;
+            expect(_.reject([1, 2, 3], twoOrMore)).to.be.eql([1]);
+        });
+        it('returns an empty array if no predicate - str', () => {
             expect(_.reject('string', (x) => {
                 return x === 's';
             })).to.be.eql(['t', 'r', 'i', 'n', 'g']);
+        });
+        it('returns an empty array if no predicate - obj', () => {
+            const twoOrMore = x => x >= 2;
             expect(_.reject({
                 key1: 1,
                 key2: 2
-            }, (x) => {
-                return x >= 2;
-            })).to.be.eql([1]);
+            }, twoOrMore)).to.be.eql([1]);
         });
     });
 
@@ -808,6 +814,17 @@ describe('_', () => {
         it('returns an array of unique values only', () => {
             expect(_.uniq([1, 2, 3, 3, 3, 3, 3])).to.eql([1, 2, 3]);
             expect(_.uniq(['a', 'a', 'b', 'b', 'b', 'b', 'b'])).to.eql(['a', 'b']);
+        });
+        it('returns an array of unique values only - more complex', () => {
+            expect(_.uniq([1, 2, 3, 3, 3, 2, 2, 1, 3, 2, 1])).to.eql([1, 2, 3]);
+            expect(_.uniq(['a', 'b', 'a', 'a', 'b', 'b', 'b', 'b', 'b'])).to.eql(['a', 'b']);
+        });
+        it('returns an empty array for num or obj', () => {
+            expect(_.uniq(1232)).to.eql([]);
+            expect(_.uniq({
+                key1: 1,
+                key2: 2
+            })).to.eql([]);
         });
     });
 });
