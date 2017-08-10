@@ -334,8 +334,13 @@ describe('_', () => {
             expect(_.flatten([1, 2, 3])).to.eql([1, 2, 3]);
         });
         it('returns an empty arr if given obj or num', () => {
-            expect(_.flatten({a:1})).to.eql([]);
+            expect(_.flatten({
+                a: 1
+            })).to.eql([]);
             expect(_.flatten(123)).to.eql([]);
+        });
+        it('returns a split array of a str for a str', () => {
+            expect(_.flatten('hello')).to.eql(['h','e','l','l','o']);
         });
     });
 });

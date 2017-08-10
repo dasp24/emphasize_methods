@@ -78,6 +78,7 @@ _.reduce = (list, iteratee, context) => {
 _.flatten = (arr) => {
     const result = [];
     if (Array.isArray(arr)) return arr;
+    if (typeof arr === 'string') return arr.split('');
     return result;
 };
 
