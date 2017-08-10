@@ -330,5 +330,12 @@ describe('_', () => {
         it('exists', () => {
             expect(_.flatten).to.be.a('function');
         });
+        it('returns an array if nothing nested', () => {
+            expect(_.flatten([1, 2, 3])).to.eql([1, 2, 3]);
+        });
+        it('returns an empty arr if given obj or num', () => {
+            expect(_.flatten({a:1})).to.eql([]);
+            expect(_.flatten(123)).to.eql([]);
+        });
     });
 });

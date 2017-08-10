@@ -75,8 +75,10 @@ _.reduce = (list, iteratee, context) => {
     }
 };
 
-_.flatten = () => {
-
+_.flatten = (arr) => {
+    const result = [];
+    if (Array.isArray(arr)) return arr;
+    return result;
 };
 
 if (typeof module !== 'undefined') {
