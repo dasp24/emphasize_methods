@@ -587,7 +587,6 @@ describe('_', () => {
         });
     });
 
-    // double check these tests
     describe('_.filter', () => {
         it('is a function', () => {
             expect(_.filter).to.be.a('function');
@@ -612,8 +611,25 @@ describe('_', () => {
         it('str returns correctly', () => {
             expect(_.filter('houses')).to.eql(['h', 'o', 'u', 's', 'e', 's']);
         });
+        it('only returns items that satisfy predicate - arr', () => {
+            const moreThenFour = (x) => x > 4;
+            expect(_.filter([1, 2, 3, 4, 5], moreThenFour)).to.eql([5]);
+            expect(_.filter([2, 90, 4], moreThenFour)).to.eql([90]);
+        });
+        it('only returns items that satisfy predicate - obj', () => {
+            const moreThenFour = (x) => x > 4;
+            expect(_.filter({
+                a: 1,
+                b: 5,
+                c: 10
+            }, moreThenFour)).to.eql([5, 10]);
+        });
+        it('only returns items that satisfy predicate - str', () => {
+            const isUpperCase = (x) => {if (x === x.toUpperCase()) return x};
+            expect(_.filter('HellO', isUpperCase)).to.eql(['H', 'O']);
+        });
     });
-
+  // double check these tests
     describe('_.range', () => {
         it('should be a function', () => {
             expect(_.range).to.be.a('function');

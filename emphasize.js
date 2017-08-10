@@ -141,24 +141,20 @@ _.invoke = function (list, method, argument) {
     }
 };
 
-// refactor the below methods as these were old and imported
 
 _.filter = (list, predicate) => {
     const result = [];
     if (!predicate)
         if (typeof list === 'string') return _.toArray(list);
         else return _.values(list);
-
-    if (list.length === 0 || typeof list === 'number' || Object.keys(list).length === 0) {
-        return [];
-    }
-    for (let i = 0; i < list.length; i++) {
-        if (predicate(list[i])) {
-            result.push(list[i]);
+    if (Array.isArray(list) || typeof list === 'string')
+        for (let i = 0; i < list.length; i++) {
+            if (predicate(list[i])) {
+                result.push(list[i]);
+            }
         }
-    }
-    if (typeof list === 'object' && !Array.isArray(list)) {
-        for (var key in list) {
+    else if (typeof list === 'object') {
+        for (let key in list) {
             if (predicate(list[key])) {
                 result.push(list[key]);
             }
@@ -167,6 +163,7 @@ _.filter = (list, predicate) => {
     return result;
 };
 
+// refactor the below methods as these were old and imported
 _.range = function (arg1, arg2, arg3) {
     const solution = [];
     if (arg2 === undefined && arg3 === undefined) {
