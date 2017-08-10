@@ -1,5 +1,8 @@
 first x
-initial
-keys
-values
-each
+initial x
+keys x
+values x
+each x
+map x
+reduce x
+flatten x
