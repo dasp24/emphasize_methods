@@ -75,17 +75,17 @@ _.reduce = (list, iteratee, context) => {
     }
 };
 
-_.flatten = (arr) => {
+_.flatten = (arr, shallow) => {
     const result = [];
     if (Array.isArray(arr)) {
         const resultAr = arr.reduce((acc, elem) => {
-            if (Array.isArray(elem)) return acc.concat(_.flatten(elem));
+            if (Array.isArray(elem)) 
+                return (shallow) ? acc.concat(elem) : acc.concat(_.flatten(elem));
             else acc.push(elem);
             return acc;
         }, []);
         return resultAr;
     }
-
     if (typeof arr === 'string') return arr.split('');
     return result;
 };
