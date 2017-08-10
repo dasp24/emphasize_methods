@@ -131,6 +131,16 @@ _.random = (min,max) => {
     return Math.floor(Math.random() * (max - min)) + min;
 };
 
+_.invoke = function (list, method, argument) {
+  if (Array.isArray(list)) {
+    return list.map((elem) => {
+      return elem[method].call(elem, argument);
+    });
+  } else {
+    return 'Not a valid list';
+  }
+};
+
 if (typeof module !== 'undefined') {
     module.exports = _;
 }

@@ -497,4 +497,32 @@ describe('_', () => {
         expect(_.random(-25,-50)).to.be.at.least(-50);
       });
   });
+
+  describe('.invoke', function () {
+    it('is a function', function () {
+      expect(_.invoke).to.be.a('function');
+    });
+    it('only works with list', function () {
+      expect(_.invoke({
+        a: 1
+      }, 'split')).to.equal('Not a valid list');
+    });
+    it('sorts two arrays', function () {
+      expect(_.invoke([
+        [3, 2, 1],
+        [4, 5, 6]
+      ], 'sort')).to.eql([
+        [1, 2, 3],
+        [4, 5, 6]
+      ]);
+    });
+    it('uppercases a string', function () {
+      expect(_.invoke(['party time'], 'toUpperCase')).to.eql(['PARTY TIME']);
+    });
+    it('takes an argument which is passed to method', function () {
+      expect(_.invoke(['party time'], 'split', '')).to.eql([
+        ['p', 'a', 'r', 't', 'y', ' ', 't', 'i', 'm', 'e']
+      ]);
+    });
+  });
 });
