@@ -162,7 +162,7 @@ _.filter = (list, predicate) => {
 };
 
 _.range = function (arg1, arg2, arg3) {
-    var solution = [];
+    const solution = [];
     if (arg2 === undefined && arg3 === undefined) {
         if (arg1 > 0) {
             for (let i = 0; i < arg1; i++) {
@@ -208,14 +208,14 @@ _.reject = (list, predicate) => {
     return [];
   }
   var result = [];
-  for (var i = 0; i < list.length; i++) {
+  for (let i = 0; i < list.length; i++) {
     if (!predicate(list[i])) {
       result.push(list[i]);
     }
   }
 
   if (typeof list === 'object' && !Array.isArray(list)) {
-    for (var key in list) {
+    for (let key in list) {
       if (!predicate(list[key])) {
         result.push(list[key]);
       }
