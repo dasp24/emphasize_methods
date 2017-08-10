@@ -1,6 +1,6 @@
 const {
     expect
-} = require("chai");
+} = require('chai');
 const path = require('path');
 const _ = require(path.join(__dirname, '..', './emphasize.js'));
 
@@ -9,6 +9,7 @@ describe('_', () => {
     it('is an object', () => {
         expect(_).to.be.an('object');
     });
+
     describe('_.first', () => {
         it('exists', () => {
             expect(_.first).to.be.a('function');
@@ -58,6 +59,7 @@ describe('_', () => {
 
         });
     });
+
     describe('_.initial', () => {
         it('exists', () => {
             expect(_.initial).to.be.a('function');
@@ -88,6 +90,7 @@ describe('_', () => {
             expect(_.initial(str, 2)).to.eql(['b', 'o']);
         });
     });
+
     describe('_.keys', () => {
         it('exists', () => {
             expect(_.keys).to.be.a('function');
@@ -109,6 +112,7 @@ describe('_', () => {
             expect(_.keys(123)).to.eql([]);
         });
     });
+
     describe('_.values', () => {
         it('exists', () => {
             expect(_.values).to.be.a('function');
@@ -131,6 +135,7 @@ describe('_', () => {
             expect(_.values('hello')).to.eql([]);
         });
     });
+
     describe('_.each', () => {
         it('exists', () => {
             expect(_.each).to.be.a('function');
@@ -175,6 +180,7 @@ describe('_', () => {
             expect(count).to.equal(str.length);
         });
     });
+
     describe('_.map', () => {
         it('exists', () => {
             expect(_.map).to.be.a('function');
@@ -202,6 +208,7 @@ describe('_', () => {
             expect(_.map(123, double)).to.eql([]);
         });
     });
+
     describe('_.reduce', function () {
         it('is a function', function () {
             expect(_.reduce).to.be.a('function');
@@ -326,6 +333,7 @@ describe('_', () => {
             }, [])).to.eql(['H', 'E', 'L', 'L', 'O']);
         });
     });
+
     describe('_.flatten', () => {
         it('exists', () => {
             expect(_.flatten).to.be.a('function');
@@ -462,9 +470,21 @@ describe('_', () => {
       ]);
     });
   });
+ 
   describe('_.random', () => {
-      it('exists',() => {
+    it('exists',() => {
         expect(_.random).to.be.a('function');
+      });
+    it('returns a random number between two args',() => {
+        expect(_.random(1,99)).to.be.a('number');
+      });
+        it('returns an integer between the two values',() => {
+        expect(_.random(1,99)).to.be.at.least(1);
+        expect(_.random(1,99)).to.be.below(99);
+        const test = () => {
+            return _.random(1,99) % 1 === 0 ? true : false;
+        }
+        expect(test()).to.equal(true);
       });
   });
 });

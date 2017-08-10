@@ -126,8 +126,8 @@ _.partition = (array, predicate) => {
   return [firstArray, secondArray];
 };
 
-_.random = () => {
-
+_.random = (min,max) => {
+    return Math.floor(Math.random() * (max - min)) + min;
 };
 
 if (typeof module !== 'undefined') {
