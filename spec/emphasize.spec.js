@@ -340,7 +340,10 @@ describe('_', () => {
             expect(_.flatten(123)).to.eql([]);
         });
         it('returns a split array of a str for a str', () => {
-            expect(_.flatten('hello')).to.eql(['h','e','l','l','o']);
+            expect(_.flatten('hello')).to.eql(['h', 'e', 'l', 'l', 'o']);
+        });
+        it('flattens array', () => {
+            expect(_.flatten([1,[2],[3],'hello'])).to.eql([1, 2, 3, 'hello']);
         });
     });
 });

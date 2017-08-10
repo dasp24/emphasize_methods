@@ -77,10 +77,19 @@ _.reduce = (list, iteratee, context) => {
 
 _.flatten = (arr) => {
     const result = [];
-    if (Array.isArray(arr)) return arr;
+    if (Array.isArray(arr)) {
+        const resultAr = arr.reduce((acc, elem) => {
+            if (typeof elem === 'string' || typeof elem === 'number') acc.push(elem)
+            if (Array.isArray(elem)) return acc.concat(elem);
+            return acc;
+        }, []);
+        return resultAr;
+    }
+
     if (typeof arr === 'string') return arr.split('');
     return result;
 };
+
 
 if (typeof module !== 'undefined') {
     module.exports = _;
