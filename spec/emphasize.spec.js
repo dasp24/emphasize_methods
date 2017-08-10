@@ -350,6 +350,8 @@ describe('_', () => {
         it('flattens nested arrays', () => {
             expect(_.flatten([1,[[2]],[3],'hello'])).to.eql([1, 2, 3, 'hello']);
             expect(_.flatten([1,[34,[2,3],['hello']]])).to.eql([1, 34, 2, 3, 'hello']);
+            expect(_.flatten([23,[true,null],[[[[[42]]]]]])).to.eql([23, true, null, 42]);
+            expect(_.flatten([23,[true,null,[[[{a:1}]]]],[[[[[42]]]]]])).to.eql([23, true, null,{a:1}, 42]);
         });
     });
 });
