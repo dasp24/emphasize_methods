@@ -826,5 +826,8 @@ describe('_', () => {
                 key2: 2
             })).to.eql([]);
         });
+        it('if given a string, return arr with unique chars', () => {
+            expect(_.uniq('hello')).to.eql(['h', 'e', 'l','o']);
+        });
     });
 });

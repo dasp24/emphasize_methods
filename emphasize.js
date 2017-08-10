@@ -212,6 +212,7 @@ _.reject = (list, predicate) => {
 
 _.uniq = (array) => {
     if (typeof array === 'object' && !Array.isArray(array) || typeof array === 'number') return [];
+    if (typeof array === 'string') array = _.toArray(array)
     return array.reduce((acc, x) => {
         if (acc.indexOf(x) === -1) acc.push(x);
         return acc;
