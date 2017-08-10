@@ -201,4 +201,128 @@ describe('_', () => {
             expect(_.map(123, double)).to.eql([]);
         });
     });
+    describe('_.reduce', function () {
+        it('is a function', function () {
+            expect(_.reduce).to.be.a('function');
+        });
+        it('should add together numbers in an array', function () {
+            const list = [1, 2, 3];
+            expect(_.reduce(list, (acc, elem) => {
+                return acc + elem;
+            })).to.equal(6);
+        });
+        it('should add together numbers in an array in addition to context', () => {
+            const list = [1, 2, 3];
+            expect(_.reduce(list, (acc, elem) => {
+                return acc + elem;
+            }, 3)).to.equal(9);
+        });
+        it('return an array with an array', () => {
+            const list = [1, 2, 3];
+            expect(_.reduce(list, (acc, elem) => {
+                acc.push(elem);
+                return acc;
+            }, [])).to.eql([1, 2, 3]);
+            expect(_.reduce(list, (acc, elem) => {
+                if (elem > 1) acc.push(elem);
+                return acc;
+            }, [])).to.eql([2, 3]);
+        });
+        it('return an object with an array as arg', () => {
+            const list = [1, 2, 3];
+            expect(_.reduce(list, (acc, elem) => {
+                acc[elem] = elem;
+                return acc;
+            }, {})).to.eql({
+                '1': 1,
+                '2': 2,
+                '3': 3
+            });
+            expect(_.reduce(list, (acc, elem) => {
+                acc[elem] = elem * 2;
+                return acc;
+            }, {})).to.eql({
+                '1': 2,
+                '2': 4,
+                '3': 6
+            });
+        });
+        it('return a string with an array as arg', () => {
+            const list = ['h', 2, 'e', 'l', 'l', 3, 'o'];
+            expect(_.reduce(list, (acc, elem) => {
+                if (typeof elem === 'string') acc += elem;
+                return acc;
+            }, '')).to.equal('hello');
+        });
+        it('returns an object with an object', () => {
+            const list = {
+                a: 1,
+                b: 2,
+                c: 3
+            };
+            expect(_.reduce(list, (acc, elem) => {
+                acc[elem] = elem;
+                return acc;
+            }, {})).to.eql({
+                '1': 1,
+                '2': 2,
+                '3': 3
+            });
+        });
+        it('returns a string with an object', () => {
+            const list = {
+                a: 'hel',
+                b: 'l',
+                c: 'o'
+            };
+            expect(_.reduce(list, (acc, elem) => {
+                acc += elem;
+                return acc;
+            }, '')).to.equal('hello');
+        });
+        it('adds all numbers', () => {
+            const list = {
+                a: 1,
+                b: 'a',
+                c: 2
+            };
+            expect(_.reduce(list, (acc, elem) => {
+                if (typeof elem === 'number')
+                    return acc + elem;
+                else return acc;
+            }, 0)).to.equal(3);
+        });
+        it('adds all numbers', () => {
+            const list = {
+                a: 1,
+                b: 'a',
+                c: 2
+            };
+            expect(_.reduce(list, (acc, elem) => {
+                if (typeof elem === 'number')
+                    return acc + elem;
+                else return acc;
+            })).to.equal(3);
+        });
+        it('object returns an array', () => {
+            const list = {
+                a: 1,
+                b: 'a',
+                c: 2
+            };
+            expect(_.reduce(list, (acc, elem) => {
+                if (typeof elem !== 'number')
+                    acc.push(elem);
+                else acc.push(elem * 3);
+                return acc;
+            }, [])).to.eql([3, 'a', 6]);
+        });
+        it('function works with string', () => {
+            const list = 'hello';
+            expect(_.reduce(list, (acc, elem) => {
+                acc.push(elem.toUpperCase());
+                return acc;
+            }, [])).to.eql(['H', 'E', 'L', 'L', 'O']);
+        });
+    });
 });
