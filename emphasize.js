@@ -47,8 +47,14 @@ _.each = (list, iteratee) => {
     return list;
 };
 
-_.map = () => {
-
+_.map = (list, iteratee) => {
+const result = [];
+if (Array.isArray(list)) {
+        for (let i = 0; i < list.length; i++) {
+            result.push(iteratee(list[i]));
+        }
+    }
+    return result;
 };
 
 if (typeof module !== 'undefined') {

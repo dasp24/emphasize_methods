@@ -178,5 +178,10 @@ describe('_', () => {
         it('exists', () => {
             expect(_.map).to.be.a('function');
         });
+        it('returns a list of equal length changed by iteree', () => {
+            const arr = [1, 2, 3];
+            const double = (x) => x * 2;
+            expect(_.map(arr, double)).to.eql([2,4,6]);
+        });
     });
 });
