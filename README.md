@@ -14,3 +14,8 @@ toArray x
 partition x
 random x
 invoke x
+filter x
+range x
+where x
+reject x
+uniq x
