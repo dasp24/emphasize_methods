@@ -490,5 +490,11 @@ describe('_', () => {
         expect(_.random(50)).to.be.at.least(0);
         expect(_.random(50)).to.be.below(50);
       });
+    it('works correctly with negative nums',() => {
+        expect(_.random(-50)).to.be.below(0);
+        expect(_.random(-50)).to.be.at.least(-50);
+        expect(_.random(-25,-50)).to.be.below(-25);
+        expect(_.random(-25,-50)).to.be.at.least(-50);
+      });
   });
 });
