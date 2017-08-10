@@ -22,6 +22,10 @@ _.keys = (obj) => {
     return result;
 };
 
+_.values = () => {
+
+};
+
 if (typeof module !== 'undefined') {
     module.exports = _;
 }

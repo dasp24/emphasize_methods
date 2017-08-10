@@ -108,4 +108,9 @@ describe('_', () => {
             expect(_.keys(123)).to.eql([]);
         });
     });
+    describe('_.values', () => {
+        it('exists', () => {
+            expect(_.values).to.be.a('function');
+        });
+    });
 });
