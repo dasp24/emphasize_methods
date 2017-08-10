@@ -326,4 +326,9 @@ describe('_', () => {
             }, [])).to.eql(['H', 'E', 'L', 'L', 'O']);
         });
     });
+    describe('_.flatten', () => {
+        it('exists', () => {
+            expect(_.flatten).to.be.a('function');
+        });
+    });
 });

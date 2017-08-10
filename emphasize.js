@@ -75,6 +75,10 @@ _.reduce = (list, iteratee, context) => {
     }
 };
 
+_.flatten = () => {
+
+};
+
 if (typeof module !== 'undefined') {
     module.exports = _;
 }
