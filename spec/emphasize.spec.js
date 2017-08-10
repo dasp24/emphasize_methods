@@ -478,13 +478,17 @@ describe('_', () => {
     it('returns a random number between two args',() => {
         expect(_.random(1,99)).to.be.a('number');
       });
-        it('returns an integer between the two values',() => {
+    it('returns an integer between the two values',() => {
         expect(_.random(1,99)).to.be.at.least(1);
         expect(_.random(1,99)).to.be.below(99);
         const test = () => {
             return _.random(1,99) % 1 === 0 ? true : false;
-        }
+        };
         expect(test()).to.equal(true);
+      });
+    it('only 1 arg - return random value between 0 - num',() => {
+        expect(_.random(50)).to.be.at.least(0);
+        expect(_.random(50)).to.be.below(50);
       });
   });
 });

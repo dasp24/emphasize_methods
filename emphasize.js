@@ -127,6 +127,7 @@ _.partition = (array, predicate) => {
 };
 
 _.random = (min,max) => {
+    if (!max) return Math.floor(Math.random() * min);
     return Math.floor(Math.random() * (max - min)) + min;
 };
 
