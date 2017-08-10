@@ -498,16 +498,16 @@ describe('_', () => {
       });
   });
 
-  describe('.invoke', function () {
-    it('is a function', function () {
+  describe('.invoke', () => {
+    it('is a function', () => {
       expect(_.invoke).to.be.a('function');
     });
-    it('only works with list', function () {
+    it('only works with list', () => {
       expect(_.invoke({
         a: 1
       }, 'split')).to.equal('Not a valid list');
     });
-    it('sorts two arrays', function () {
+    it('sorts two arrays', () => {
       expect(_.invoke([
         [3, 2, 1],
         [4, 5, 6]
@@ -516,13 +516,153 @@ describe('_', () => {
         [4, 5, 6]
       ]);
     });
-    it('uppercases a string', function () {
+    it('uppercases a string', () => {
       expect(_.invoke(['party time'], 'toUpperCase')).to.eql(['PARTY TIME']);
     });
     it('takes an argument which is passed to method', function () {
       expect(_.invoke(['party time'], 'split', '')).to.eql([
         ['p', 'a', 'r', 't', 'y', ' ', 't', 'i', 'm', 'e']
       ]);
+    });
+  });
+
+  describe('_.range', () => {
+    it('should be a function', () => {
+      expect(_.range).to.be.a('function');
+    });
+    it('should create the correct (non-inclusive) range when passed a single argument', () => {
+      expect(_.range(10)).to.eql([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+      expect(_.range(5)).to.eql([0, 1, 2, 3, 4]);
+      expect(_.range(7)).to.eql([0, 1, 2, 3, 4, 5, 6]);
+    });
+    it('should create the correct range between a start and stop value if passed 2 arguments', () => {
+      expect(_.range(1, 11)).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+      expect(_.range(2, 5)).to.eql([2, 3, 4]);
+      expect(_.range(10, 15)).to.eql([10, 11, 12, 13, 14]);
+    });
+    it('should use the step if provided as a third argument', () => {
+      expect(_.range(2, 10, 2)).to.eql([2, 4, 6, 8]);
+      expect(_.range(2, 5, 1)).to.eql([2, 3, 4]);
+    });
+    it('should also works for negative ranges and negative steps', () => {
+      // expect(_.range(0, -5)).to.eql([0, -1, -2, -3, -4]);
+      expect(_.range(0, -10, -2)).to.eql([0, -2, -4, -6, -8]);
+      expect(_.range(0, -5, -1)).to.eql([0, -1, -2, -3, -4]);
+    });
+    it('should return an empty array if asked to create an infinite or empty range', () => {
+      expect(_.range(2, -10, 2)).to.eql([]);
+      expect(_.range(2, 10, -2)).to.eql([]);
+      expect(_.range(2, -10)).to.eql([]);
+      expect(_.range(2, 2)).to.eql([]);
+      expect(_.range(2, 2, 5)).to.eql([]);
+    });
+  });
+
+  describe('_.filter', () => {
+    it('is a function', () => {
+      expect(_.filter).to.be.a('function');
+    });
+    it('returns an empty array if the list paramater is empty or the list is one number', ()  =>{
+      expect(_.filter([])).to.be.eql([]);
+      expect(_.filter({})).to.be.eql([]);
+      expect(_.filter(1)).to.be.eql([]);
+      expect(_.filter(6767)).to.be.eql([]);
+      expect(_.filter('')).to.be.eql([]);
+    });
+    it('return an array subject to conditions in predicate', ()  => {
+      expect(_.filter([1, 2, 3], (x) => {
+        return x >= 2;
+      })).to.be.eql([2, 3]);
+      expect(_.filter('string', (x) => {
+        return x === 's';
+      })).to.be.eql(['s']);
+      expect(_.filter({
+        key1: 1,
+        key2: 2
+      }, (x) => {
+        return x >= 2;
+      })).to.be.eql([2]);
+    });
+  });
+
+  describe('_.where', ()  => {
+    it('should be a function', () => {
+      expect(_.where).to.be.a('function');
+    });
+    it('should take 2 arguments', () => {
+      expect(_.where.length).to.equal(2);
+    });
+    it('should look through each value in an array, returning an array of all the values that contain all of the key-value pairs listed in properties', function () {
+      var list = [
+        {breed: 'Pug', age: 1, character: 'friendly'},
+        {breed: 'Spitz', age: 3, character: 'shy'},
+        {breed: 'Greyhound', age: 11, character: 'friendly'},
+        {breed: 'Labrador', age: 5, character: 'lazy'},
+        {breed: 'Pug', age: 5, character: 'energetic'}
+      ];
+      expect(_.where(list, {character: 'friendly'})).to.eql([
+        {breed: 'Pug', age: 1, character: 'friendly'},
+        {breed: 'Greyhound', age: 11, character: 'friendly'}
+      ]);
+      expect(_.where(list, {breed: 'Pug', character: 'friendly'})).to.eql([
+        {breed: 'Pug', age: 1, character: 'friendly'}
+      ]);
+    });
+    it('should look through each value in an object, returning an array of all the values that contain all of the key-value pairs listed in properties', function () {
+      var list = {
+        a: {breed: 'Pug', age: 1, character: 'friendly'},
+        b: {breed: 'Spitz', age: 3, character: 'shy'},
+        c: {breed: 'Greyhound', age: 11, character: 'friendly'},
+        d: {breed: 'Labrador', age: 5, character: 'lazy'},
+        e: {breed: 'Pug', age: 5, character: 'energetic'}
+      };
+      expect(_.where(list, {character: 'friendly'})).to.eql([
+        {breed: 'Pug', age: 1, character: 'friendly'},
+        {breed: 'Greyhound', age: 11, character: 'friendly'}
+      ]);
+      expect(_.where(list, {breed: 'Pug', character: 'friendly'})).to.eql([
+        {breed: 'Pug', age: 1, character: 'friendly'}
+      ]);
+    });
+  });
+
+describe('_.reject', () => {
+    it('is a function', () => {
+      expect(_.reject).to.be.a('function');
+    });
+    it('returns an empty array if the list paramater is empty or the list is one number', function () {
+      expect(_.reject([])).to.be.eql([]);
+      expect(_.reject({})).to.be.eql([]);
+      expect(_.reject(1)).to.be.eql([]);
+      expect(_.reject(6767)).to.be.eql([]);
+      expect(_.reject('')).to.be.eql([]);
+    });
+    it('return an array subject to conditions in predicate', () => {
+      expect(_.reject([1, 2, 3], (x) =>  {
+        return x >= 2;
+      })).to.be.eql([1]);
+      expect(_.reject('string', (x) =>  {
+        return x === 's';
+      })).to.be.eql(['t', 'r', 'i', 'n', 'g']);
+      expect(_.reject({
+        key1: 1,
+        key2: 2
+      }, (x) =>  {
+        return x >= 2;
+      })).to.be.eql([1]);
+    });
+  });
+
+  describe('_.uniq', () => {
+    it('is a function', () => {
+      expect(_.uniq).to.be.a('function');
+    });
+    it('returns an array', () => {
+      expect(_.uniq([1, 2, 3])).to.be.an('array');
+    });
+    it('returns an array of unique values only', () => {
+      expect(_.uniq([1, 2, 3, 3, 3, 3, 3])).to.eql([1, 2, 3]);
+      expect(_.uniq(['a', 'a', 'b', 'b', 'b', 'b', 'b'])).to.eql(['a', 'b']);
     });
   });
 });
