@@ -47,6 +47,10 @@ _.each = (list, iteratee) => {
     return list;
 };
 
+_.map = () => {
+
+};
+
 if (typeof module !== 'undefined') {
     module.exports = _;
 }

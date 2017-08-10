@@ -163,7 +163,7 @@ describe('_', () => {
             expect(count).to.equal(_.keys(obj).length);
         });
         it('make sure it goes over each item given - str', () => {
-            const str = 'people'
+            const str = 'people';
             let count = 0;
 
             const counter = () => {
@@ -172,6 +172,11 @@ describe('_', () => {
 
             expect(_.each(str, counter)).to.equal(str);
             expect(count).to.equal(str.length);
+        });
+    });
+    describe('_.map', () => {
+        it('exists', () => {
+            expect(_.map).to.be.a('function');
         });
     });
 });
