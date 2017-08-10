@@ -181,7 +181,24 @@ describe('_', () => {
         it('returns a list of equal length changed by iteree', () => {
             const arr = [1, 2, 3];
             const double = (x) => x * 2;
-            expect(_.map(arr, double)).to.eql([2,4,6]);
+            expect(_.map(arr, double)).to.eql([2, 4, 6]);
+        });
+        it('returns an array equal to length of str changed by iteree', () => {
+            const str = 'chaos control';
+            const toUpperCase = (x) => x.toUpperCase();
+            expect(_.map(str, toUpperCase)).to.eql(str.toUpperCase().split(''));
+        });
+        it('returns an array with values of obj changed', () => {
+            const obj = {
+                a: 1,
+                2: 'b'
+            };
+            const double = (x) => x * 2;
+            expect(_.map(obj, double)).to.eql([NaN, 2]);
+        });
+        it('returns an empty arr if list is a number', () => {
+            const double = (x) => x * 2;
+            expect(_.map(123, double)).to.eql([]);
         });
     });
 });

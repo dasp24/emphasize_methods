@@ -49,9 +49,14 @@ _.each = (list, iteratee) => {
 
 _.map = (list, iteratee) => {
 const result = [];
-if (Array.isArray(list)) {
+if (Array.isArray(list) || typeof list === 'string') {
         for (let i = 0; i < list.length; i++) {
             result.push(iteratee(list[i]));
+        }
+    }
+    else if (typeof list === 'object') {
+        for (let key in list) {
+            result.push(iteratee(list[key]));
         }
     }
     return result;
