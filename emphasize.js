@@ -14,10 +14,11 @@ _.initial = (arr, n = 1) => {
 };
 
 _.keys = (obj) => {
-    const result =[];
-    for (let key in obj) {
-        result.push(key)
-    }
+    const result = [];
+    if (typeof obj === 'object')
+        for (let key in obj) {
+            result.push(key);
+        }
     return result;
 };
 

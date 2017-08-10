@@ -96,8 +96,16 @@ describe('_', () => {
                 a: 1,
                 b: 2,
                 c: 3
-            }
-            expect(_.keys(obj)).to.eql(['a','b','c']);
+            };
+            expect(_.keys(obj)).to.eql(['a', 'b', 'c']);
+        });
+        it('returns the indexes of an array', () => {
+            const arr = [2, 5, 8];
+            expect(_.keys(arr)).to.eql(['0', '1', '2']);
+        });
+        it('returns empty arr if given a string or num', () => {
+            expect(_.keys('boom')).to.eql([]);
+            expect(_.keys(123)).to.eql([]);
         });
     });
 });
