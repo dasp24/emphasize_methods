@@ -344,6 +344,12 @@ describe('_', () => {
         });
         it('flattens array', () => {
             expect(_.flatten([1,[2],[3],'hello'])).to.eql([1, 2, 3, 'hello']);
+            expect(_.flatten([1,[2,3],'hello'])).to.eql([1, 2, 3, 'hello']);
+            expect(_.flatten([1,[2,3],['hello']])).to.eql([1, 2, 3, 'hello']);
+        });
+        it('flattens nested arrays', () => {
+            expect(_.flatten([1,[[2]],[3],'hello'])).to.eql([1, 2, 3, 'hello']);
+            expect(_.flatten([1,[34,[2,3],['hello']]])).to.eql([1, 34, 2, 3, 'hello']);
         });
     });
 });

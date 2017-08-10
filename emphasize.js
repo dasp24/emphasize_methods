@@ -79,8 +79,8 @@ _.flatten = (arr) => {
     const result = [];
     if (Array.isArray(arr)) {
         const resultAr = arr.reduce((acc, elem) => {
-            if (typeof elem === 'string' || typeof elem === 'number') acc.push(elem)
-            if (Array.isArray(elem)) return acc.concat(elem);
+            if (typeof elem === 'string' || typeof elem === 'number') acc.push(elem);
+            if (Array.isArray(elem)) return acc.concat(_.flatten(elem));
             return acc;
         }, []);
         return resultAr;
