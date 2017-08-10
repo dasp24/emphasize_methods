@@ -827,7 +827,14 @@ describe('_', () => {
             })).to.eql([]);
         });
         it('if given a string, return arr with unique chars', () => {
-            expect(_.uniq('hello')).to.eql(['h', 'e', 'l','o']);
+            expect(_.uniq('hello')).to.eql(['h', 'e', 'l', 'o']);
+        });
+        it('works with a few edge cases', () => {
+            expect(_.uniq([true,true, 'hello','hello',[1,2,3],[1,2]])).to.eql([true,'hello',[1,2,3],[1,2]]);
+            expect(_.uniq([true,true, 'hello','hello',[1,2,3],[1,2,3]])).to.eql([true,'hello',[1,2,3],[1,2,3]]);
+            expect(_.uniq([true,true, 'hello','hello',{a:[1,2,3]},{a:[1,2,3]}])).to.eql([true,'hello',{a:[1,2,3]},{a:[1,2,3]}]);
+            expect(_.uniq([undefined,undefined, false,'hello',{a:[1,2,3]},{a:[1,2,3]}])).to.eql([undefined, false,'hello',{a:[1,2,3]},{a:[1,2,3]}]);
+            
         });
     });
 });
