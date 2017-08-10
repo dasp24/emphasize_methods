@@ -141,11 +141,17 @@ _.invoke = function (list, method, argument) {
     }
 };
 
+// refactor the below methods as these were old and imported
+
 _.filter = (list, predicate) => {
+    const result = [];
+    if (!predicate)
+        if (typeof list === 'string') return _.toArray(list);
+        else return _.values(list);
+
     if (list.length === 0 || typeof list === 'number' || Object.keys(list).length === 0) {
         return [];
     }
-    const result = [];
     for (let i = 0; i < list.length; i++) {
         if (predicate(list[i])) {
             result.push(list[i]);
@@ -204,31 +210,32 @@ function includesProperties(obj, properties) {
 }
 
 _.reject = (list, predicate) => {
-  if (list.length === 0 || typeof list === 'number' || Object.keys(list).length === 0) {
-    return [];
-  }
-  var result = [];
-  for (let i = 0; i < list.length; i++) {
-    if (!predicate(list[i])) {
-      result.push(list[i]);
+    const result = [];
+    if (list.length === 0 || typeof list === 'number' || Object.keys(list).length === 0) {
+        return result;
     }
-  }
 
-  if (typeof list === 'object' && !Array.isArray(list)) {
-    for (let key in list) {
-      if (!predicate(list[key])) {
-        result.push(list[key]);
-      }
+    for (let i = 0; i < list.length; i++) {
+        if (!predicate(list[i])) {
+            result.push(list[i]);
+        }
     }
-  }
-  return result;
+
+    if (typeof list === 'object' && !Array.isArray(list)) {
+        for (let key in list) {
+            if (!predicate(list[key])) {
+                result.push(list[key]);
+            }
+        }
+    }
+    return result;
 };
 
 _.uniq = (array) => {
-  return array.reduce((acc, x) => {
-    if (acc.indexOf(x) === -1) acc.push(x);
-    return acc;
-  }, []);
+    return array.reduce((acc, x) => {
+        if (acc.indexOf(x) === -1) acc.push(x);
+        return acc;
+    }, []);
 };
 
 if (typeof module !== 'undefined') {

@@ -351,29 +351,87 @@ describe('_', () => {
             expect(_.flatten('hello')).to.eql(['h', 'e', 'l', 'l', 'o']);
         });
         it('flattens array', () => {
-            expect(_.flatten([1,[2],[3],'hello'])).to.eql([1, 2, 3, 'hello']);
-            expect(_.flatten([1,[2,3],'hello'])).to.eql([1, 2, 3, 'hello']);
-            expect(_.flatten([1,[2,3],['hello']])).to.eql([1, 2, 3, 'hello']);
+            expect(_.flatten([1, [2],
+                [3], 'hello'
+            ])).to.eql([1, 2, 3, 'hello']);
+            expect(_.flatten([1, [2, 3], 'hello'])).to.eql([1, 2, 3, 'hello']);
+            expect(_.flatten([1, [2, 3],
+                ['hello']
+            ])).to.eql([1, 2, 3, 'hello']);
         });
         it('flattens nested arrays', () => {
-            expect(_.flatten([1,[[2]],[3],'hello'])).to.eql([1, 2, 3, 'hello']);
-            expect(_.flatten([1,[34,[2,3],['hello']]])).to.eql([1, 34, 2, 3, 'hello']);
-            expect(_.flatten([23,[true,null],[[[[[42]]]]]])).to.eql([23, true, null, 42]);
-            expect(_.flatten([23,[true,null,[[[{a:1}]]]],[[[[[42]]]]]])).to.eql([23, true, null,{a:1}, 42]);
+            expect(_.flatten([1, [
+                    [2]
+                ],
+                [3], 'hello'
+            ])).to.eql([1, 2, 3, 'hello']);
+            expect(_.flatten([1, [34, [2, 3],
+                ['hello']
+            ]])).to.eql([1, 34, 2, 3, 'hello']);
+            expect(_.flatten([23, [true, null],
+                [
+                    [
+                        [
+                            [
+                                [42]
+                            ]
+                        ]
+                    ]
+                ]
+            ])).to.eql([23, true, null, 42]);
+            expect(_.flatten([23, [true, null, [
+                    [
+                        [{
+                            a: 1
+                        }]
+                    ]
+                ]],
+                [
+                    [
+                        [
+                            [
+                                [42]
+                            ]
+                        ]
+                    ]
+                ]
+            ])).to.eql([23, true, null, {
+                a: 1
+            }, 42]);
         });
         it('takes a second argument, if true only flattens once', () => {
-            expect(_.flatten([1,[[2]],[3],'hello'],true)).to.eql([1, [2], 3, 'hello']);
-            expect(_.flatten([1,[[[2]]],[[3]],'hello'],[1,2,3])).to.eql([1, [[2]], [3], 'hello']);
-            expect(_.flatten([1,[34,[2,3],['hello']]], true)).to.eql([1,34,[2,3],['hello']]);
-            
+            expect(_.flatten([1, [
+                    [2]
+                ],
+                [3], 'hello'
+            ], true)).to.eql([1, [2], 3, 'hello']);
+            expect(_.flatten([1, [
+                    [
+                        [2]
+                    ]
+                ],
+                [
+                    [3]
+                ], 'hello'
+            ], [1, 2, 3])).to.eql([1, [
+                    [2]
+                ],
+                [3], 'hello'
+            ]);
+            expect(_.flatten([1, [34, [2, 3],
+                ['hello']
+            ]], true)).to.eql([1, 34, [2, 3],
+                ['hello']
+            ]);
+
         });
     });
-        describe('_.identity', () => {
+    describe('_.identity', () => {
         it('is a function', () => {
             expect(_.identity).to.be.a('function');
         });
         it('returns same item given - arr', () => {
-            const arr = [1,2,3];
+            const arr = [1, 2, 3];
             expect(_.identity(arr)).to.be.an('array');
             expect(_.identity(arr)).to.equal(arr);
         });
@@ -388,7 +446,10 @@ describe('_', () => {
             expect(_.identity(str)).to.equal(str);
         });
         it('returns same item given - obj', () => {
-            const obj = {a:1,b:2}
+            const obj = {
+                a: 1,
+                b: 2
+            }
             expect(_.identity(obj)).to.be.an('object');
             expect(_.identity(obj)).to.equal(obj);
         });
@@ -398,271 +459,335 @@ describe('_', () => {
             expect(_.toArray).to.be.a('function');
         });
         it('array just get returned', () => {
-        const list = [1, 2, 3, 4];
+            const list = [1, 2, 3, 4];
             expect(_.toArray(list)).to.equal(list);
-        const list2 = [
-            [1, 2, 3, 4], {
-            a: 1,
-            b: 2
-            }
-        ];
+            const list2 = [
+                [1, 2, 3, 4], {
+                    a: 1,
+                    b: 2
+                }
+            ];
             expect(_.toArray(list2)).to.equal(list2);
         });
         it('returns an array for an object', () => {
-        const list = {
-            a: 1,
-            2: 'b'
-        };
+            const list = {
+                a: 1,
+                2: 'b'
+            };
             expect(_.toArray(list)).to.eql(['b', 1]);
         });
         it('returns an array for a string', () => {
-        const list = 'hello';
+            const list = 'hello';
             expect(_.toArray(list)).to.eql(['h', 'e', 'l', 'l', 'o']);
         });
         it('returns empty array if not a list', () => {
-        const list = 1234;
+            const list = 1234;
             expect(_.toArray(list)).to.eql([]);
         });
     });
-    
+
     describe('_.partition', () => {
-    it('is a function', () => {
-      expect(_.partition).to.be.a('function');
+        it('is a function', () => {
+            expect(_.partition).to.be.a('function');
+        });
+        it('takes to args - array and predicate', () => {
+            expect(_.partition.length).to.equal(2);
+        });
+        it('if no predicate, returns array-if iterable', () => {
+            expect(_.partition('hello')).to.eql([
+                ['h', 'e', 'l', 'l', 'o'],
+                []
+            ]);
+            expect(_.partition([1, 2, 3, 4, 5])).to.eql([
+                [1, 2, 3, 4, 5],
+                []
+            ]);
+        });
+        it('returns two array depending on func for array and obj', () => {
+            const isOdd = (x) => {
+                if (x % 2 !== 0) return x;
+            };
+            expect(_.partition([1, 2, 3], isOdd)).to.eql([
+                [1, 3],
+                [2]
+            ]);
+            expect(_.partition({
+                a: 1,
+                b: 2,
+                c: 3,
+                d: 4
+            }, isOdd)).to.eql([
+                [1, 3],
+                [2, 4]
+            ]);
+        });
+        it('works for a string', () => {
+            const big = (x) => {
+                if (x > 'h') return x;
+            };
+            expect(_.partition('hello', big)).to.eql([
+                ['l', 'l', 'o'],
+                ['h', 'e']
+            ]);
+        });
     });
-    it('takes to args - array and predicate', () => {
-      expect(_.partition.length).to.equal(2);
-    });
-    it('if no predicate, returns array-if iterable', () => {
-      expect(_.partition('hello')).to.eql([
-        ['h', 'e', 'l', 'l', 'o'],
-        []
-      ]);
-      expect(_.partition([1, 2, 3, 4, 5])).to.eql([
-        [1, 2, 3, 4, 5],
-        []
-      ]);
-    });
-    it('returns two array depending on func for array and obj', () => {
-      const isOdd = (x) => {
-        if (x % 2 !== 0) return x;
-      };
-      expect(_.partition([1, 2, 3], isOdd)).to.eql([
-        [1, 3],
-        [2]
-      ]);
-      expect(_.partition({
-        a: 1,
-        b: 2,
-        c: 3,
-        d: 4
-      }, isOdd)).to.eql([
-        [1, 3],
-        [2, 4]
-      ]);
-    });
-    it('works for a string', () => {
-      const big = (x) => {
-        if (x > 'h') return x;
-      };
-      expect(_.partition('hello', big)).to.eql([
-        ['l', 'l', 'o'],
-        ['h', 'e']
-      ]);
-    });
-  });
- 
-  describe('_.random', () => {
-    it('exists',() => {
-        expect(_.random).to.be.a('function');
-      });
-    it('returns a random number between two args',() => {
-        expect(_.random(1,99)).to.be.a('number');
-      });
-    it('returns an integer between the two values',() => {
-        expect(_.random(1,99)).to.be.at.least(1);
-        expect(_.random(1,99)).to.be.below(99);
-        const test = () => {
-            return _.random(1,99) % 1 === 0 ? true : false;
-        };
-        expect(test()).to.equal(true);
-      });
-    it('only 1 arg - return random value between 0 - num',() => {
-        expect(_.random(50)).to.be.at.least(0);
-        expect(_.random(50)).to.be.below(50);
-      });
-    it('works correctly with negative nums',() => {
-        expect(_.random(-50)).to.be.below(0);
-        expect(_.random(-50)).to.be.at.least(-50);
-        expect(_.random(-25,-50)).to.be.below(-25);
-        expect(_.random(-25,-50)).to.be.at.least(-50);
-      });
-  });
 
-  describe('.invoke', () => {
-    it('is a function', () => {
-      expect(_.invoke).to.be.a('function');
+    describe('_.random', () => {
+        it('exists', () => {
+            expect(_.random).to.be.a('function');
+        });
+        it('returns a random number between two args', () => {
+            expect(_.random(1, 99)).to.be.a('number');
+        });
+        it('returns an integer between the two values', () => {
+            expect(_.random(1, 99)).to.be.at.least(1);
+            expect(_.random(1, 99)).to.be.below(99);
+            const test = () => {
+                return _.random(1, 99) % 1 === 0 ? true : false;
+            };
+            expect(test()).to.equal(true);
+        });
+        it('only 1 arg - return random value between 0 - num', () => {
+            expect(_.random(50)).to.be.at.least(0);
+            expect(_.random(50)).to.be.below(50);
+        });
+        it('works correctly with negative nums', () => {
+            expect(_.random(-50)).to.be.below(0);
+            expect(_.random(-50)).to.be.at.least(-50);
+            expect(_.random(-25, -50)).to.be.below(-25);
+            expect(_.random(-25, -50)).to.be.at.least(-50);
+        });
     });
-    it('only works with list', () => {
-      expect(_.invoke({
-        a: 1
-      }, 'split')).to.equal('Not a valid list');
-    });
-    it('sorts two arrays', () => {
-      expect(_.invoke([
-        [3, 2, 1],
-        [4, 5, 6]
-      ], 'sort')).to.eql([
-        [1, 2, 3],
-        [4, 5, 6]
-      ]);
-    });
-    it('uppercases a string', () => {
-      expect(_.invoke(['party time'], 'toUpperCase')).to.eql(['PARTY TIME']);
-    });
-    it('takes an argument which is passed to method', function () {
-      expect(_.invoke(['party time'], 'split', '')).to.eql([
-        ['p', 'a', 'r', 't', 'y', ' ', 't', 'i', 'm', 'e']
-      ]);
-    });
-  });
 
-  describe('_.range', () => {
-    it('should be a function', () => {
-      expect(_.range).to.be.a('function');
+    describe('.invoke', () => {
+        it('is a function', () => {
+            expect(_.invoke).to.be.a('function');
+        });
+        it('only works with list', () => {
+            expect(_.invoke({
+                a: 1
+            }, 'split')).to.equal('Not a valid list');
+        });
+        it('sorts two arrays', () => {
+            expect(_.invoke([
+                [3, 2, 1],
+                [4, 5, 6]
+            ], 'sort')).to.eql([
+                [1, 2, 3],
+                [4, 5, 6]
+            ]);
+        });
+        it('uppercases a string', () => {
+            expect(_.invoke(['party time'], 'toUpperCase')).to.eql(['PARTY TIME']);
+        });
+        it('takes an argument which is passed to method', function () {
+            expect(_.invoke(['party time'], 'split', '')).to.eql([
+                ['p', 'a', 'r', 't', 'y', ' ', 't', 'i', 'm', 'e']
+            ]);
+        });
     });
-    it('should create the correct (non-inclusive) range when passed a single argument', () => {
-      expect(_.range(10)).to.eql([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-      expect(_.range(5)).to.eql([0, 1, 2, 3, 4]);
-      expect(_.range(7)).to.eql([0, 1, 2, 3, 4, 5, 6]);
-    });
-    it('should create the correct range between a start and stop value if passed 2 arguments', () => {
-      expect(_.range(1, 11)).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-      expect(_.range(2, 5)).to.eql([2, 3, 4]);
-      expect(_.range(10, 15)).to.eql([10, 11, 12, 13, 14]);
-    });
-    it('should use the step if provided as a third argument', () => {
-      expect(_.range(2, 10, 2)).to.eql([2, 4, 6, 8]);
-      expect(_.range(2, 5, 1)).to.eql([2, 3, 4]);
-    });
-    it('should also works for negative ranges and negative steps', () => {
-      // expect(_.range(0, -5)).to.eql([0, -1, -2, -3, -4]);
-      expect(_.range(0, -10, -2)).to.eql([0, -2, -4, -6, -8]);
-      expect(_.range(0, -5, -1)).to.eql([0, -1, -2, -3, -4]);
-    });
-    it('should return an empty array if asked to create an infinite or empty range', () => {
-      expect(_.range(2, -10, 2)).to.eql([]);
-      expect(_.range(2, 10, -2)).to.eql([]);
-      expect(_.range(2, -10)).to.eql([]);
-      expect(_.range(2, 2)).to.eql([]);
-      expect(_.range(2, 2, 5)).to.eql([]);
-    });
-  });
 
-  describe('_.filter', () => {
-    it('is a function', () => {
-      expect(_.filter).to.be.a('function');
+    // double check these tests
+    describe('_.filter', () => {
+        it('is a function', () => {
+            expect(_.filter).to.be.a('function');
+        });
+        it('returns the values in array if just given an obj', () => {
+            expect(_.filter({
+                a: 1
+            })).to.be.eql([1]);
+            expect(_.filter({
+                a: 1,
+                2: 'b',
+                4: 'c',
+                d: 3
+            })).to.be.eql(['b', 'c', 1, 3]);
+            expect(_.filter([3, 4, 1, 2])).to.be.eql([3, 4, 1, 2]);
+        });
+        it('empty array returned for any number', () => {
+            expect(_.filter(123)).to.eql([]);
+        });
+        it('str returns correctly', () => {
+            expect(_.filter('houses')).to.eql(['h', 'o', 'u', 's', 'e', 's']);
+        });
     });
-    it('returns an empty array if the list paramater is empty or the list is one number', ()  =>{
-      expect(_.filter([])).to.be.eql([]);
-      expect(_.filter({})).to.be.eql([]);
-      expect(_.filter(1)).to.be.eql([]);
-      expect(_.filter(6767)).to.be.eql([]);
-      expect(_.filter('')).to.be.eql([]);
-    });
-    it('return an array subject to conditions in predicate', ()  => {
-      expect(_.filter([1, 2, 3], (x) => {
-        return x >= 2;
-      })).to.be.eql([2, 3]);
-      expect(_.filter('string', (x) => {
-        return x === 's';
-      })).to.be.eql(['s']);
-      expect(_.filter({
-        key1: 1,
-        key2: 2
-      }, (x) => {
-        return x >= 2;
-      })).to.be.eql([2]);
-    });
-  });
 
-  describe('_.where', ()  => {
-    it('should be a function', () => {
-      expect(_.where).to.be.a('function');
+    describe('_.range', () => {
+        it('should be a function', () => {
+            expect(_.range).to.be.a('function');
+        });
+        it('should create the correct (non-inclusive) range when passed a single argument', () => {
+            expect(_.range(10)).to.eql([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+            expect(_.range(5)).to.eql([0, 1, 2, 3, 4]);
+            expect(_.range(7)).to.eql([0, 1, 2, 3, 4, 5, 6]);
+        });
+        it('should create the correct range between a start and stop value if passed 2 arguments', () => {
+            expect(_.range(1, 11)).to.eql([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+            expect(_.range(2, 5)).to.eql([2, 3, 4]);
+            expect(_.range(10, 15)).to.eql([10, 11, 12, 13, 14]);
+        });
+        it('should use the step if provided as a third argument', () => {
+            expect(_.range(2, 10, 2)).to.eql([2, 4, 6, 8]);
+            expect(_.range(2, 5, 1)).to.eql([2, 3, 4]);
+        });
+        it('should also works for negative ranges and negative steps', () => {
+            expect(_.range(0, -10, -2)).to.eql([0, -2, -4, -6, -8]);
+            expect(_.range(0, -5, -1)).to.eql([0, -1, -2, -3, -4]);
+        });
+        it('should return an empty array if asked to create an infinite or empty range', () => {
+            expect(_.range(2, -10, 2)).to.eql([]);
+            expect(_.range(2, 10, -2)).to.eql([]);
+            expect(_.range(2, -10)).to.eql([]);
+            expect(_.range(2, 2)).to.eql([]);
+            expect(_.range(2, 2, 5)).to.eql([]);
+        });
     });
-    it('should take 2 arguments', () => {
-      expect(_.where.length).to.equal(2);
-    });
-    it('should look through each value in an array, returning an array of all the values that contain all of the key-value pairs listed in properties', function () {
-      var list = [
-        {breed: 'Pug', age: 1, character: 'friendly'},
-        {breed: 'Spitz', age: 3, character: 'shy'},
-        {breed: 'Greyhound', age: 11, character: 'friendly'},
-        {breed: 'Labrador', age: 5, character: 'lazy'},
-        {breed: 'Pug', age: 5, character: 'energetic'}
-      ];
-      expect(_.where(list, {character: 'friendly'})).to.eql([
-        {breed: 'Pug', age: 1, character: 'friendly'},
-        {breed: 'Greyhound', age: 11, character: 'friendly'}
-      ]);
-      expect(_.where(list, {breed: 'Pug', character: 'friendly'})).to.eql([
-        {breed: 'Pug', age: 1, character: 'friendly'}
-      ]);
-    });
-    it('should look through each value in an object, returning an array of all the values that contain all of the key-value pairs listed in properties', function () {
-      var list = {
-        a: {breed: 'Pug', age: 1, character: 'friendly'},
-        b: {breed: 'Spitz', age: 3, character: 'shy'},
-        c: {breed: 'Greyhound', age: 11, character: 'friendly'},
-        d: {breed: 'Labrador', age: 5, character: 'lazy'},
-        e: {breed: 'Pug', age: 5, character: 'energetic'}
-      };
-      expect(_.where(list, {character: 'friendly'})).to.eql([
-        {breed: 'Pug', age: 1, character: 'friendly'},
-        {breed: 'Greyhound', age: 11, character: 'friendly'}
-      ]);
-      expect(_.where(list, {breed: 'Pug', character: 'friendly'})).to.eql([
-        {breed: 'Pug', age: 1, character: 'friendly'}
-      ]);
-    });
-  });
 
-describe('_.reject', () => {
-    it('is a function', () => {
-      expect(_.reject).to.be.a('function');
+    describe('_.where', () => {
+        it('should be a function', () => {
+            expect(_.where).to.be.a('function');
+        });
+        it('should take 2 arguments', () => {
+            expect(_.where.length).to.equal(2);
+        });
+        it('should look through each value in an array, returning an array of all the values that contain all of the key-value pairs listed in properties', function () {
+            var list = [{
+                    breed: 'Pug',
+                    age: 1,
+                    character: 'friendly'
+                },
+                {
+                    breed: 'Spitz',
+                    age: 3,
+                    character: 'shy'
+                },
+                {
+                    breed: 'Greyhound',
+                    age: 11,
+                    character: 'friendly'
+                },
+                {
+                    breed: 'Labrador',
+                    age: 5,
+                    character: 'lazy'
+                },
+                {
+                    breed: 'Pug',
+                    age: 5,
+                    character: 'energetic'
+                }
+            ];
+            expect(_.where(list, {
+                character: 'friendly'
+            })).to.eql([{
+                    breed: 'Pug',
+                    age: 1,
+                    character: 'friendly'
+                },
+                {
+                    breed: 'Greyhound',
+                    age: 11,
+                    character: 'friendly'
+                }
+            ]);
+            expect(_.where(list, {
+                breed: 'Pug',
+                character: 'friendly'
+            })).to.eql([{
+                breed: 'Pug',
+                age: 1,
+                character: 'friendly'
+            }]);
+        });
+        it('should look through each value in an object, returning an array of all the values that contain all of the key-value pairs listed in properties', function () {
+            var list = {
+                a: {
+                    breed: 'Pug',
+                    age: 1,
+                    character: 'friendly'
+                },
+                b: {
+                    breed: 'Spitz',
+                    age: 3,
+                    character: 'shy'
+                },
+                c: {
+                    breed: 'Greyhound',
+                    age: 11,
+                    character: 'friendly'
+                },
+                d: {
+                    breed: 'Labrador',
+                    age: 5,
+                    character: 'lazy'
+                },
+                e: {
+                    breed: 'Pug',
+                    age: 5,
+                    character: 'energetic'
+                }
+            };
+            expect(_.where(list, {
+                character: 'friendly'
+            })).to.eql([{
+                    breed: 'Pug',
+                    age: 1,
+                    character: 'friendly'
+                },
+                {
+                    breed: 'Greyhound',
+                    age: 11,
+                    character: 'friendly'
+                }
+            ]);
+            expect(_.where(list, {
+                breed: 'Pug',
+                character: 'friendly'
+            })).to.eql([{
+                breed: 'Pug',
+                age: 1,
+                character: 'friendly'
+            }]);
+        });
     });
-    it('returns an empty array if the list paramater is empty or the list is one number', function () {
-      expect(_.reject([])).to.be.eql([]);
-      expect(_.reject({})).to.be.eql([]);
-      expect(_.reject(1)).to.be.eql([]);
-      expect(_.reject(6767)).to.be.eql([]);
-      expect(_.reject('')).to.be.eql([]);
-    });
-    it('return an array subject to conditions in predicate', () => {
-      expect(_.reject([1, 2, 3], (x) =>  {
-        return x >= 2;
-      })).to.be.eql([1]);
-      expect(_.reject('string', (x) =>  {
-        return x === 's';
-      })).to.be.eql(['t', 'r', 'i', 'n', 'g']);
-      expect(_.reject({
-        key1: 1,
-        key2: 2
-      }, (x) =>  {
-        return x >= 2;
-      })).to.be.eql([1]);
-    });
-  });
 
-  describe('_.uniq', () => {
-    it('is a function', () => {
-      expect(_.uniq).to.be.a('function');
+    describe('_.reject', () => {
+        it('is a function', () => {
+            expect(_.reject).to.be.a('function');
+        });
+        it('returns an empty array if the list paramater is empty or the list is one number', function () {
+            expect(_.reject([])).to.be.eql([]);
+            expect(_.reject({})).to.be.eql([]);
+            expect(_.reject(1)).to.be.eql([]);
+            expect(_.reject(6767)).to.be.eql([]);
+            expect(_.reject('')).to.be.eql([]);
+        });
+        it('return an array subject to conditions in predicate', () => {
+            expect(_.reject([1, 2, 3], (x) => {
+                return x >= 2;
+            })).to.be.eql([1]);
+            expect(_.reject('string', (x) => {
+                return x === 's';
+            })).to.be.eql(['t', 'r', 'i', 'n', 'g']);
+            expect(_.reject({
+                key1: 1,
+                key2: 2
+            }, (x) => {
+                return x >= 2;
+            })).to.be.eql([1]);
+        });
     });
-    it('returns an array', () => {
-      expect(_.uniq([1, 2, 3])).to.be.an('array');
+
+    describe('_.uniq', () => {
+        it('is a function', () => {
+            expect(_.uniq).to.be.a('function');
+        });
+        it('returns an array', () => {
+            expect(_.uniq([1, 2, 3])).to.be.an('array');
+        });
+        it('returns an array of unique values only', () => {
+            expect(_.uniq([1, 2, 3, 3, 3, 3, 3])).to.eql([1, 2, 3]);
+            expect(_.uniq(['a', 'a', 'b', 'b', 'b', 'b', 'b'])).to.eql(['a', 'b']);
+        });
     });
-    it('returns an array of unique values only', () => {
-      expect(_.uniq([1, 2, 3, 3, 3, 3, 3])).to.eql([1, 2, 3]);
-      expect(_.uniq(['a', 'a', 'b', 'b', 'b', 'b', 'b'])).to.eql(['a', 'b']);
-    });
-  });
 });
