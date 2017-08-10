@@ -54,6 +54,7 @@ describe('_', () => {
             expect(_.first(arr2, 5)).to.eql([3, 7, 11, 99]);
             expect(_.first(num, 2)).to.eql([]);
             expect(_.first(obj, 2)).to.eql([]);
+            expect(_.first(arr, -2)).to.eql([]);
 
         });
     });
