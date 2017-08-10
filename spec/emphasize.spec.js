@@ -360,4 +360,14 @@ describe('_', () => {
             
         });
     });
+        describe('_.identity', function () {
+        it('is a function', function () {
+            expect(_.identity).to.be.a('function');
+        });
+        it('returns same item given', function () {
+            const arr = [1,2,3]
+            expect(_.identity(arr)).to.be.an('array');
+            expect(_.identity(arr)).to.equal(arr);
+        });
+    });
 });

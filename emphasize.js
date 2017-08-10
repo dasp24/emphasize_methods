@@ -90,6 +90,9 @@ _.flatten = (arr, shallow) => {
     return result;
 };
 
+_.identity = (input) => {
+    return input;
+};
 
 if (typeof module !== 'undefined') {
     module.exports = _;
