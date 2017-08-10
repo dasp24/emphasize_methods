@@ -34,9 +34,14 @@ _.values = (obj) => {
 
 _.each = (list, iteratee) => {
     if (typeof(list) === 'number') return list;
-    if (Array.isArray(list)) {
+    if (Array.isArray(list) || typeof list === 'string') {
         for (let i = 0; i < list.length; i++) {
-            iteratee(list[i])
+            iteratee(list[i]);
+        }
+    }
+    else if (typeof list === 'object') {
+        for (let key in list) {
+            iteratee(list[key]);
         }
     }
     return list;

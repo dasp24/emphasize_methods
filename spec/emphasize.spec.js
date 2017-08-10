@@ -137,15 +137,41 @@ describe('_', () => {
         it('returns a number if given as first arg', () => {
             expect(_.each(123)).to.equal(123);
         });
-        it('make sure it goes over each item given', () => {
+        it('make sure it goes over each item given - arr', () => {
             const arr = [1, 2, 3];
             let count = 0;
 
-            function counter() {
+            const counter = () => {
                 return count++;
-            }
-            expect(_.each(arr,counter)).to.equal(arr);
+            };
+
+            expect(_.each(arr, counter)).to.equal(arr);
             expect(count).to.equal(arr.length);
+        });
+        it('make sure it goes over each item given - obj', () => {
+            const obj = {
+                a: 1,
+                b: 2
+            };
+            let count = 0;
+
+            const counter = () => {
+                return count++;
+            };
+
+            expect(_.each(obj, counter)).to.equal(obj);
+            expect(count).to.equal(_.keys(obj).length);
+        });
+        it('make sure it goes over each item given - str', () => {
+            const str = 'people'
+            let count = 0;
+
+            const counter = () => {
+                return count++;
+            };
+
+            expect(_.each(str, counter)).to.equal(str);
+            expect(count).to.equal(str.length);
         });
     });
 });
