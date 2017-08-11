@@ -2,7 +2,13 @@
 
 first x 
 
+last x
+
 initial x
+
+indexOf x
+
+contains x
 
 keys x
 
@@ -14,11 +20,11 @@ map x
 
 reduce x
 
+every x
+
 flatten x
 
 identity x
-
-last
 
 toArray x
 
@@ -43,3 +49,5 @@ once x
 memoize x
 
 shuffle x
+
+some x
