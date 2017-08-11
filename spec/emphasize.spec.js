@@ -883,12 +883,15 @@ describe('_', () => {
             expect(count).to.equal(1);
         });
     });
+
     describe('_.memoize', () => {
         it('exists', () => {
             expect(_.memoize).to.be.a('function');
         });
         it('returns same value as original funcion', function () {
-            let double = function (n) { return 2 * n; };
+            let double = function (n) {
+                return 2 * n;
+            };
             let spy = sinon.spy(double);
             let memDouble = _.memoize(spy);
             memDouble(5);
@@ -896,13 +899,27 @@ describe('_', () => {
             memDouble(5);
             expect(spy.callCount).to.equal(1);
         });
-    
+
         it('the returned function should have a cache prop', function () {
-            
-            let double = function (n) { return 2 * n; };
+
+            let double = function (n) {
+                return 2 * n;
+            };
             let memDouble = _.memoize(double);
             memDouble(3);
-            expect(memDouble.cache).to.eql({ '3': 6 });
+            expect(memDouble.cache).to.eql({
+                '3': 6
+            });
+        });
+    });
+    describe('_.shuffle', () => {
+        it('exists', () => {
+            expect(_.shuffle).to.be.a('function');
+        });
+        it('shouldnt return the same array, the array should be the same length', function () {
+            const largeArray = [1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 10, 1, 1, 1, 1000, 5, 5, 6, 7, 8, 3, 5, 800];
+            expect(_.shuffle(largeArray)).to.not.eql(largeArray);
+            expect(_.shuffle(largeArray).length).to.equal(largeArray.length);
         });
     });
 });

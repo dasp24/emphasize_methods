@@ -241,6 +241,17 @@ _.memoize = function (fn, hashFunction) {
     return miniMemo;
   };
 
+  _.shuffle = function (list) {
+    if (list.length < 2) return list;
+    const shuffledlist = [];
+    while (list.length > 0) {
+      const indexToRemove = Math.floor(Math.random() * list.length);
+      shuffledlist.push(list[indexToRemove]);
+      list = list.slice(0, indexToRemove).concat(list.slice(indexToRemove + 1));
+    }
+    return shuffledlist;
+  };
+
 if (typeof module !== 'undefined') {
     module.exports = _;
 }
