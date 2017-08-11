@@ -830,11 +830,54 @@ describe('_', () => {
             expect(_.uniq('hello')).to.eql(['h', 'e', 'l', 'o']);
         });
         it('works with a few edge cases', () => {
-            expect(_.uniq([true,true, 'hello','hello',[1,2,3],[1,2]])).to.eql([true,'hello',[1,2,3],[1,2]]);
-            expect(_.uniq([true,true, 'hello','hello',[1,2,3],[1,2,3]])).to.eql([true,'hello',[1,2,3],[1,2,3]]);
-            expect(_.uniq([true,true, 'hello','hello',{a:[1,2,3]},{a:[1,2,3]}])).to.eql([true,'hello',{a:[1,2,3]},{a:[1,2,3]}]);
-            expect(_.uniq([undefined,undefined, false,'hello',{a:[1,2,3]},{a:[1,2,3]}])).to.eql([undefined, false,'hello',{a:[1,2,3]},{a:[1,2,3]}]);
-            
+            expect(_.uniq([true, true, 'hello', 'hello', [1, 2, 3],
+                [1, 2]
+            ])).to.eql([true, 'hello', [1, 2, 3],
+                [1, 2]
+            ]);
+            expect(_.uniq([true, true, 'hello', 'hello', [1, 2, 3],
+                [1, 2, 3]
+            ])).to.eql([true, 'hello', [1, 2, 3],
+                [1, 2, 3]
+            ]);
+            expect(_.uniq([true, true, 'hello', 'hello', {
+                a: [1, 2, 3]
+            }, {
+                a: [1, 2, 3]
+            }])).to.eql([true, 'hello', {
+                a: [1, 2, 3]
+            }, {
+                a: [1, 2, 3]
+            }]);
+            expect(_.uniq([undefined, undefined, false, 'hello', {
+                a: [1, 2, 3]
+            }, {
+                a: [1, 2, 3]
+            }])).to.eql([undefined, false, 'hello', {
+                a: [1, 2, 3]
+            }, {
+                a: [1, 2, 3]
+            }]);
+
+        });
+    });
+    describe('_.once', () => {
+        it('exists', () => {
+            expect(_.once).to.be.a('function');
+        });
+        it('returns a function', () => {
+            const funFunc = () => 'Hello world';
+            expect(_.once(funFunc)).to.be.a('function');
+        });
+        it('the given function only executes once', () => {
+            let count = 0;
+            const oneUp = () => count++;
+            const funny = _.once(oneUp);
+            expect(funny()).to.equal(0);
+            expect(count).to.equal(1);
+            funny();
+            funny();
+            expect(count).to.equal(1);
         });
     });
 });

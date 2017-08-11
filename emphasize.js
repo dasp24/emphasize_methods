@@ -198,13 +198,12 @@ _.reject = (list, predicate) => {
     const result = [];
     if (!predicate) return result;
     if (Array.isArray(list) || typeof list === 'string') {
-        for (let i = 0; i < list.length; i++) 
-            if (!predicate(list[i])) 
+        for (let i = 0; i < list.length; i++)
+            if (!predicate(list[i]))
                 result.push(list[i]);
-    }
-    else if (typeof list === 'object') {
-        for (let key in list) 
-            if (!predicate(list[key])) 
+    } else if (typeof list === 'object') {
+        for (let key in list)
+            if (!predicate(list[key]))
                 result.push(list[key]);
     }
     return result;
@@ -217,6 +216,16 @@ _.uniq = (array) => {
         if (acc.indexOf(x) === -1) acc.push(x);
         return acc;
     }, []);
+};
+
+_.once = (func) => {
+    let stopper = false;
+    return () => {
+        if (stopper === false) {
+            stopper = true;
+            return func.call(null, arguments);
+        }
+    };
 };
 
 if (typeof module !== 'undefined') {
