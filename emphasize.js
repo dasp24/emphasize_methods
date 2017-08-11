@@ -20,6 +20,26 @@ _.initial = (arr, n = 1) => {
     else return [];
 };
 
+_.indexOf = (array, value) => {
+    if (Array.isArray(array) || typeof (array) === 'string') {
+        return array.indexOf(value);
+    } else {
+        return -1;
+    }
+};
+
+_.contains = (list, value) => {
+    if (Array.isArray(list))
+        return (_.indexOf(list, value) === -1) ? false : true;
+    else
+        for (var key in list) {
+            if (list[key] === value) {
+                return true;
+            }
+        }
+    return false;
+};
+
 _.keys = (obj) => {
     const result = [];
     if (typeof obj === 'object')
@@ -187,7 +207,6 @@ _.range = (arg1, arg2, arg3) => {
     return solution;
 };
 
-// refactor the below methods as these were old and imported
 _.where = (list, properties) => {
     return _.filter(list, function (obj) {
         return includesProperties(obj, properties);
@@ -246,18 +265,33 @@ _.memoize = function (fn, hashFunction) {
     };
     miniMemo.cache = cache;
     return miniMemo;
-  };
+};
 
-  _.shuffle = function (list) {
+_.shuffle = function (list) {
     if (list.length < 2) return list;
     const shuffledlist = [];
     while (list.length > 0) {
-      const indexToRemove = Math.floor(Math.random() * list.length);
-      shuffledlist.push(list[indexToRemove]);
-      list = list.slice(0, indexToRemove).concat(list.slice(indexToRemove + 1));
+        const indexToRemove = Math.floor(Math.random() * list.length);
+        shuffledlist.push(list[indexToRemove]);
+        list = list.slice(0, indexToRemove).concat(list.slice(indexToRemove + 1));
     }
     return shuffledlist;
-  };
+};
+
+_.some = (list, predicate) => {
+    
+      if (Array.isArray(list) || typeof list === 'string') {
+        return (_.filter(list, predicate).length !== 0) ? true : false;
+      }
+      if (typeof list === 'object') {
+        for (let key in list) {
+          if (predicate(list[key])) {
+            return true;
+          }
+        }
+      }
+      return false;
+    };
 
 if (typeof module !== 'undefined') {
     module.exports = _;

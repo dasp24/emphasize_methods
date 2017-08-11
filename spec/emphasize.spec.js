@@ -112,6 +112,60 @@ describe('_', () => {
         });
     });
 
+    describe('_.indexOf', () => {
+        it('is a function', () => {
+            expect(_.indexOf).to.be.a('function');
+        });
+        it('returns -1 if object or numbers given as input', () => {
+            expect(_.indexOf({
+                a: 1,
+                b: 2
+            }, 1)).to.equal(-1);
+            expect(_.indexOf(12345, 5)).to.equal(-1);
+        });
+        it('returns index of value in array or string', () => {
+            expect(_.indexOf([1, 2, 3, 4, 5], 3)).to.equal(2);
+            expect(_.indexOf('hello world', 'l')).to.equal(2);
+        });
+        it('returns -1 if the value is not in array or string', () => {
+            expect(_.indexOf([1, 2, 3, 4, 5], 6)).to.equal(-1);
+            expect(_.indexOf('hello world', 'p')).to.equal(-1);
+        });
+    });
+
+    describe('_.contains', () => {
+        it('is a function', () => {
+            expect(_.contains).to.be.a('function');
+        });
+        it('should return a boolean', () => {
+            expect(_.contains()).to.be.a('boolean');
+        });
+        it('[array]should return true is value is present', () => {
+            expect(_.contains([1, 2, 3], 1)).to.equal(true);
+            expect(_.contains(['foo', 'bar'], 'bar')).to.equal(true);
+        });
+        it('[array]should return false if value isn\'t present', () => {
+            expect(_.contains([1, 2, 3], 4)).to.equal(false);
+            expect(_.contains(['foo', 'bar'], 'tree')).to.equal(false);
+        });
+        it('[object]should return true is value is present', () => {
+            expect(_.contains({
+                1: 'a',
+                2: 'b',
+                3: 'c'
+            }, 'c')).to.equal(true);
+            // expect(_.contains(['foo', 'bar'],'bar')).to.equal(true);
+        });
+        it('[object]should return false if value isn\'t present', () => {
+            expect(_.contains({
+                1: 'a',
+                2: 'b',
+                3: 'c'
+            }, 'd')).to.equal(false);
+            // expect(_.contains(['foo', 'bar'],'bar')).to.equal(true);
+        });
+    });
+
     describe('_.initial', () => {
         it('exists', () => {
             expect(_.initial).to.be.a('function');
@@ -970,6 +1024,45 @@ describe('_', () => {
             const largeArray = [1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 10, 1, 1, 1, 1000, 5, 5, 6, 7, 8, 3, 5, 800];
             expect(_.shuffle(largeArray)).to.not.eql(largeArray);
             expect(_.shuffle(largeArray).length).to.equal(largeArray.length);
+        });
+    });
+    
+    describe('_.some', () => {
+        it('exists', () => {
+            expect(_.some).to.be.a('function');
+        });
+        it('array - returns true if any predicate is true', () => {
+            const isOdd = (x) => {
+                if (x % 2 !== 0) return true;
+            };
+            const moreThenThree = (x) =>
+                x > 3;
+            expect(_.some([1, 2, 3, 4], isOdd)).to.equal(true);
+            expect(_.some([2, 4], isOdd)).to.equal(false);
+            expect(_.some([2, 3, 4], moreThenThree)).to.equal(true);
+            expect(_.some([1, 2, 3], moreThenThree)).to.equal(false);
+        });
+        it('string - returns true if any item is true', () => {
+            const greaterThenC = (x) => {
+                if (x > 'b') return true;
+            };
+            expect(_.some('ab', greaterThenC)).to.equal(false);
+            expect(_.some('cde', greaterThenC)).to.equal(true);
+        });
+        it('object - returns true if any predicate is true', () => {
+            const isOdd = (x) => {
+                if (x % 2 !== 0) return true;
+            };
+            const moreThenThree = (x) =>
+                x > 3;
+            expect(_.some({
+                a: 1,
+                b: 2
+            }, isOdd)).to.equal(true);
+            expect(_.some({
+                a: 1,
+                b: 2
+            }, moreThenThree)).to.equal(false);
         });
     });
 });
