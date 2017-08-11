@@ -3,7 +3,14 @@ const _ = {};
 _.first = (arr, n = 1) => {
     if (Array.isArray(arr) && n === 1 || typeof arr === 'string' && n === 1) return arr[0];
     if (typeof arr === 'string') arr = arr.split('');
-    if (Array.isArray(arr) && n > -1) return arr.slice(0, n);
+    if (Array.isArray(arr) && n > 0) return arr.slice(0, n);
+    else return [];
+};
+
+_.last = (arr, n = 1) => {
+    if (Array.isArray(arr) && n === 1 || typeof arr === 'string' && n === 1) return arr[arr.length - 1];
+    if (typeof arr === 'string') arr = arr.split('');
+    if (Array.isArray(arr) && n > 0) return arr.slice(-n);
     else return [];
 };
 

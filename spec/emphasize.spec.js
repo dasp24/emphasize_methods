@@ -62,6 +62,56 @@ describe('_', () => {
         });
     });
 
+    describe('_.last', () => {
+        it('exists', () => {
+            expect(_.last).to.be.a('function');
+        });
+        it('returns the last value of an array', () => {
+            const arr = [1, 2, 3];
+            expect(_.last(arr)).to.equal(3);
+        });
+        it('returns the last char of a string', () => {
+            const str = 'hello';
+            expect(_.last(str)).to.equal('o');
+        });
+        it('returns empty array if given object or number', () => {
+            const num = 123;
+            expect(_.last(num)).to.eql([]);
+            const obj = {
+                a: 1,
+                b: 2
+            };
+            expect(_.last(obj)).to.eql([]);
+        });
+        it('returns the last n elements if given as a second param - arr', () => {
+            const arr = [1, 2, 3];
+            expect(_.last(arr, 2)).to.eql([2, 3]);
+            const arr2 = [1, 2, 3, 4, 5];
+            expect(_.last(arr2, 4)).to.eql([2, 3, 4, 5]);
+        });
+        it('returns the last n elements if given as a second param - str', () => {
+            const str = 'holla';
+            expect(_.last(str, 2)).to.eql(['l', 'a']);
+        });
+        it('works with some edge cases', () => {
+            const str = 'holla';
+            const arr = [1, 2, 3];
+            const num = 123;
+            const obj = {
+                a: 1,
+                b: 2
+            };
+            expect(_.last(str, 0)).to.eql([]);
+            expect(_.last(arr, 0)).to.eql([]);
+            const arr2 = [3, 7, 11, 99];
+            expect(_.last(arr2, 5)).to.eql([3, 7, 11, 99]);
+            expect(_.last(num, 2)).to.eql([]);
+            expect(_.last(obj, 2)).to.eql([]);
+            expect(_.last(arr, -2)).to.eql([]);
+
+        });
+    });
+
     describe('_.initial', () => {
         it('exists', () => {
             expect(_.initial).to.be.a('function');
