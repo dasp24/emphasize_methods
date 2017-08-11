@@ -2,6 +2,8 @@ const {
     expect
 } = require('chai');
 const path = require('path');
+const sinon = require('sinon');
+
 const _ = require(path.join(__dirname, '..', './emphasize.js'));
 
 describe('_', () => {
@@ -861,6 +863,7 @@ describe('_', () => {
 
         });
     });
+
     describe('_.once', () => {
         it('exists', () => {
             expect(_.once).to.be.a('function');
@@ -878,6 +881,28 @@ describe('_', () => {
             funny();
             funny();
             expect(count).to.equal(1);
+        });
+    });
+    describe('_.memoize', () => {
+        it('exists', () => {
+            expect(_.memoize).to.be.a('function');
+        });
+        it('returns same value as original funcion', function () {
+            let double = function (n) { return 2 * n; };
+            let spy = sinon.spy(double);
+            let memDouble = _.memoize(spy);
+            memDouble(5);
+            memDouble(5);
+            memDouble(5);
+            expect(spy.callCount).to.equal(1);
+        });
+    
+        it('the returned function should have a cache prop', function () {
+            
+            let double = function (n) { return 2 * n; };
+            let memDouble = _.memoize(double);
+            memDouble(3);
+            expect(memDouble.cache).to.eql({ '3': 6 });
         });
     });
 });

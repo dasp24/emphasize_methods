@@ -211,7 +211,7 @@ _.reject = (list, predicate) => {
 
 _.uniq = (array) => {
     if (typeof array === 'object' && !Array.isArray(array) || typeof array === 'number') return [];
-    if (typeof array === 'string') array = _.toArray(array)
+    if (typeof array === 'string') array = _.toArray(array);
     return array.reduce((acc, x) => {
         if (acc.indexOf(x) === -1) acc.push(x);
         return acc;
@@ -227,6 +227,19 @@ _.once = (func) => {
         }
     };
 };
+
+_.memoize = function (fn, hashFunction) {
+    const cache = {};
+    let miniMemo = function (key) {
+        let hash = hashFunction ? hashFunction.apply(null, arguments) : key;
+        if (!(hash in cache)) {
+            cache[hash] = fn.apply(null, arguments);
+        }
+        return cache[hash];
+    };
+    miniMemo.cache = cache;
+    return miniMemo;
+  };
 
 if (typeof module !== 'undefined') {
     module.exports = _;
