@@ -1,7 +1,6 @@
 const _ = {};
 
 // collections
-
 _.each = (list, iteratee) => {
     if (typeof (list) === 'number') return list;
     if (Array.isArray(list) || typeof list === 'string') {
@@ -44,6 +43,10 @@ _.reduce = (list, iteratee, context) => {
         return context;
     }
 };
+
+_.find = () => {
+    
+}
 
 _.filter = (list, predicate) => {
     const result = [];
@@ -195,7 +198,6 @@ _.partition = (array, predicate) => {
 };
 
 // Arrays
-
 _.first = (arr, n = 1) => {
     if (Array.isArray(arr) && n === 1 || typeof arr === 'string' && n === 1) return arr[0];
     if (typeof arr === 'string') arr = arr.split('');
@@ -266,7 +268,6 @@ _.range = (arg1, arg2, arg3) => {
 };
 
 // functions
-
 _.memoize = function (fn, hashFunction) {
     const cache = {};
     let miniMemo = function (key) {
@@ -292,7 +293,6 @@ _.once = (func) => {
 };
 
 // Objects
-
 _.keys = (obj) => {
     const result = [];
     if (typeof obj === 'object')

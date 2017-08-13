@@ -210,6 +210,12 @@ describe('_', () => {
         });
     });
 
+    describe('_.find', () => {
+        it('exists', () => {
+            expect(_.find).to.be.a('function');
+        });
+    });
+
     describe('_.filter', () => {
         it('is a function', () => {
             expect(_.filter).to.be.a('function');
@@ -1067,7 +1073,7 @@ describe('_', () => {
             expect(count).to.equal(1);
         });
     });
-    
+
     describe('_.keys', () => {
         it('exists', () => {
             expect(_.keys).to.be.a('function');
