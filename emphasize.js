@@ -46,14 +46,23 @@ _.reduce = (list, iteratee, context) => {
 
 _.find = (list, fn) => {
     let result;
+    if (Array.isArray(list) || typeof list === 'string')
     for (let i = 0; i < list.length; i++) {
         if (fn(list[i])) {
-            result = list[i];
-            return result;
+            return list[i];
+        }
+    }
+    else if (typeof list === 'object') {
+        for (let key in list) {
+            if (fn(list[key])) return list[key];
         }
     }
     return result;
 };
+
+const func = (x) => x === 2;
+const obj = {a:1,b:2};
+console.log(_.find(obj, func))
 
 _.filter = (list, predicate) => {
     const result = [];
