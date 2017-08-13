@@ -230,7 +230,7 @@ _.last = (arr, n = 1) => {
     else return [];
 };
 
-_.compact = () => {
+_.compact = (arr) => {
 
 };
 

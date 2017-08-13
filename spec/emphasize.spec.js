@@ -854,8 +854,8 @@ describe('_', () => {
         it('exists', () => {
             expect(_.compact).to.be.a('function');
         });
-        it('exists', () => {
-            expect(_.compact).to.be.a('function');
+        it('takes an array as arg', () => {
+            expect(_.compact.length).to.equal(1);
         });
     });
 
