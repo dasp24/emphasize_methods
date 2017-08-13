@@ -222,17 +222,23 @@ describe('_', () => {
         it('should find first item that satisfies condition - arr', () => {
             const func = (x) => x === 1;
             const arr = [1, 2, 3];
+            const arr2 = [2,3,4]
             expect(_.find(arr, func)).to.equal(1);
+            expect(_.find(arr2, func)).to.equal(undefined);
         });
         it('should find first item that satisfies condition - obj', () => {
             const func = (x) => x === 2;
-            const obj = {a:1,b:2};
+            const func2 = (x) => x > 2;
+            const obj = {a:1,b:2,c:3};
             expect(_.find(obj, func)).to.equal(2);
+            expect(_.find(obj, func2)).to.equal(3);
         });
         it('should find first item that satisfies condition - str', () => {
             const func = (x) => x === 'l';
+            const func2 = (x) => x > 'l';
             const str = 'hello';
             expect(_.find(str, func)).to.equal('l');
+            expect(_.find(str, func2)).to.equal('o');
         });
     });
 
