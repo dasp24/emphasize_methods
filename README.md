@@ -4,6 +4,8 @@ first x
 
 last x
 
+compact x
+
 initial x
 
 indexOf x

@@ -850,7 +850,7 @@ describe('_', () => {
         });
     });
 
-    describe.only('_.compact', () => {
+    describe('_.compact', () => {
         it('exists', () => {
             expect(_.compact).to.be.a('function');
         });
