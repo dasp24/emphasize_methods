@@ -47,11 +47,11 @@ _.reduce = (list, iteratee, context) => {
 _.find = (list, fn) => {
     let result;
     if (Array.isArray(list) || typeof list === 'string')
-    for (let i = 0; i < list.length; i++) {
-        if (fn(list[i])) {
-            return list[i];
+        for (let i = 0; i < list.length; i++) {
+            if (fn(list[i])) {
+                return list[i];
+            }
         }
-    }
     else if (typeof list === 'object') {
         for (let key in list) {
             if (fn(list[key])) return list[key];
@@ -231,7 +231,10 @@ _.last = (arr, n = 1) => {
 };
 
 _.compact = (arr) => {
-
+    return arr.reduce((acc, elem) => {
+        if (elem) acc.push(elem);
+        return acc;
+    },[]);
 };
 
 _.flatten = (arr, shallow) => {

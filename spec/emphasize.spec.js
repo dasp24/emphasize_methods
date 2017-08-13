@@ -857,6 +857,18 @@ describe('_', () => {
         it('takes an array as arg', () => {
             expect(_.compact.length).to.equal(1);
         });
+        it('returns arr if no falsy values', () => {
+            const arr = [1, 2, 3]
+            expect(_.compact(arr)).to.eql([1, 2, 3]);
+        });
+        it('returns arr with no falsy values', () => {
+            const arr = [false, null, 0, 1, 2, 3];
+            expect(_.compact(arr)).to.eql([1, 2, 3]);
+        });
+        it('returns arr with no falsy values - more complex', () => {
+            const arr = [false, null, 0, '', 'hello', 1, 2, undefined, NaN, 3, 4];
+            expect(_.compact(arr)).to.eql(['hello', 1, 2, 3, 4]);
+        });
     });
 
     describe('_.flatten', () => {
