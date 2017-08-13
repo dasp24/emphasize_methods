@@ -20,6 +20,10 @@ map x
 
 reduce x
 
+find x
+
+filter x
+
 every x
 
 flatten x
@@ -33,8 +37,6 @@ partition x
 random x
 
 invoke x
-
-filter x
 
 range x
 

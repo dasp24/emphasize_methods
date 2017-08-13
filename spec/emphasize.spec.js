@@ -210,7 +210,7 @@ describe('_', () => {
         });
     });
 
-    describe.only('_.find', () => {
+    describe('_.find', () => {
         it('exists', () => {
             expect(_.find).to.be.a('function');
         });
@@ -222,14 +222,18 @@ describe('_', () => {
         it('should find first item that satisfies condition - arr', () => {
             const func = (x) => x === 1;
             const arr = [1, 2, 3];
-            const arr2 = [2,3,4]
+            const arr2 = [2, 3, 4]
             expect(_.find(arr, func)).to.equal(1);
             expect(_.find(arr2, func)).to.equal(undefined);
         });
         it('should find first item that satisfies condition - obj', () => {
             const func = (x) => x === 2;
             const func2 = (x) => x > 2;
-            const obj = {a:1,b:2,c:3};
+            const obj = {
+                a: 1,
+                b: 2,
+                c: 3
+            };
             expect(_.find(obj, func)).to.equal(2);
             expect(_.find(obj, func2)).to.equal(3);
         });
@@ -843,6 +847,15 @@ describe('_', () => {
             expect(_.last(obj, 2)).to.eql([]);
             expect(_.last(arr, -2)).to.eql([]);
 
+        });
+    });
+
+    describe.only('_.compact', () => {
+        it('exists', () => {
+            expect(_.compact).to.be.a('function');
+        });
+        it('exists', () => {
+            expect(_.compact).to.be.a('function');
         });
     });
 

@@ -60,10 +60,6 @@ _.find = (list, fn) => {
     return result;
 };
 
-const func = (x) => x === 2;
-const obj = {a:1,b:2};
-console.log(_.find(obj, func))
-
 _.filter = (list, predicate) => {
     const result = [];
     if (!predicate)
@@ -232,6 +228,10 @@ _.last = (arr, n = 1) => {
     if (typeof arr === 'string') arr = arr.split('');
     if (Array.isArray(arr) && n > 0) return arr.slice(-n);
     else return [];
+};
+
+_.compact = () => {
+
 };
 
 _.flatten = (arr, shallow) => {
