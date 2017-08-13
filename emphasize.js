@@ -44,9 +44,16 @@ _.reduce = (list, iteratee, context) => {
     }
 };
 
-_.find = () => {
-    
-}
+_.find = (list, fn) => {
+    let result;
+    for (let i = 0; i < list.length; i++) {
+        if (fn(list[i])) {
+            result = list[i];
+            return result;
+        }
+    }
+    return result;
+};
 
 _.filter = (list, predicate) => {
     const result = [];

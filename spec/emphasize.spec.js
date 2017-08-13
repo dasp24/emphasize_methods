@@ -210,9 +210,19 @@ describe('_', () => {
         });
     });
 
-    describe('_.find', () => {
+    describe.only('_.find', () => {
         it('exists', () => {
             expect(_.find).to.be.a('function');
+        });
+        it('returns undefined if predicate isnt found in list', () => {
+            const func = (x) => x === 0;
+            const arr = [1, 2, 3];
+            expect(_.find(arr, func)).to.equal(undefined);
+        });
+        it('should find first item that satisfies condition', () => {
+            const func = (x) => x === 1;
+            const arr = [1, 2, 3];
+            expect(_.find(arr, func)).to.equal(1);
         });
     });
 
