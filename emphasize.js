@@ -234,8 +234,14 @@ _.compact = (arr) => {
     return arr.reduce((acc, elem) => {
         if (elem) acc.push(elem);
         return acc;
-    },[]);
+    }, []);
 };
+
+_.without = (arr, ...excluded) => {
+   if (!Array.isArray(arr)) arr = _.toArray(arr);
+   return arr.filter(element => !excluded.includes(element))
+};
+
 
 _.flatten = (arr, shallow) => {
     const result = [];

@@ -871,6 +871,34 @@ describe('_', () => {
         });
     });
 
+    describe.only('_.without', () => {
+        it('exists', () => {
+            expect(_.without).to.be.a('function');
+        });
+        it('uses toArray if only 1 arg given', () => {
+            expect(_.without([1, 2, 3])).to.eql([1, 2, 3]);
+            expect(_.without('boom')).to.eql(['b', 'o', 'o', 'm']);
+            expect(_.without(123)).to.eql([]);
+            expect(_.without({
+                a: 1,
+                b: 2
+            })).to.eql([1, 2]);
+        });
+        it('returns array without values given after first arg', () => {
+            const arr = [1, 2, 3];
+            expect(_.without(arr, 1)).to.eql([2, 3]);
+            const arr2 = [1, 4, 88, 34, 5, 8, 9];
+            expect(_.without(arr2, 1, 4, 9)).to.eql([ 88, 34, 5, 8 ]);
+        });
+        it('returns object without values given after first arg', () => {
+            const obj = {
+                a: 1,
+                b: 2
+            };
+            expect(_.without(obj, 1)).to.eql([2]);
+        });
+    });
+
     describe('_.flatten', () => {
         it('exists', () => {
             expect(_.flatten).to.be.a('function');
