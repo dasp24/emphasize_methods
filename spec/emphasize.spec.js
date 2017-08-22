@@ -1247,6 +1247,34 @@ describe('_', () => {
             expect(_.invert(123)).to.eql({});
             expect(_.invert('hello')).to.eql({});
         });
+        it('works for simple object', () => {
+            const obj = {
+                a: 1
+            };
+            expect(_.invert(obj)).to.eql({
+                1: 'a'
+            });
+        });
+        it('works for more complex objects', () => {
+            const obj = {
+                a: 1,
+                null: 'hello',
+                42: true
+            };
+            expect(_.invert(obj)).to.eql({
+                1: 'a',
+                hello: 'null',
+                true: '42'
+            });
+        });
+        it('also works for arrays', () => {
+            const arr = [1,'hello','noob']
+            expect(_.invert(arr)).to.eql({
+                1: '0',
+                hello: '1',
+                noob: '2'
+            });
+        });
     });
 
     describe('_.identity', () => {

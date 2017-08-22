@@ -347,8 +347,14 @@ _.pairs = (obj) => {
     return result;
 };
 
-_.invert = () => {
-    return {};
+_.invert = (obj) => {
+    const result = {};
+    if (typeof obj === 'object') {
+        for (let key in obj) {
+            result[obj[key]] = key;
+        }
+    }
+    return result;
 };
 
 // Utility
