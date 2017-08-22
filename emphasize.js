@@ -238,8 +238,8 @@ _.compact = (arr) => {
 };
 
 _.without = (arr, ...excluded) => {
-   if (!Array.isArray(arr)) arr = _.toArray(arr);
-   return arr.filter(element => !excluded.includes(element))
+    if (!Array.isArray(arr)) arr = _.toArray(arr);
+    return arr.filter(element => !excluded.includes(element))
 };
 
 
@@ -337,8 +337,14 @@ _.values = (obj) => {
     return result;
 };
 
-_.pairs = () => {
-    return [];
+_.pairs = (obj) => {
+    const result = [];
+    if (typeof obj === 'object') {
+        for (let key in obj) {
+            result.push([key, obj[key]])
+        }
+    }
+    return result;
 };
 
 // Utility

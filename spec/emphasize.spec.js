@@ -1206,6 +1206,17 @@ describe('_', () => {
             expect(_.pairs(123)).to.eql([]);
             expect(_.pairs('123')).to.eql([]);
         });
+        it('returns key value pair for an object', () => {
+            const obj = {
+                a: 1,
+                b: 2
+            }
+            expect(_.pairs(obj)).to.eql([
+                ['a', 1],
+                ['b', 2]
+            ]);
+
+        });
     });
 
     describe('_.identity', () => {
