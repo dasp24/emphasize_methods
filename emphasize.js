@@ -337,6 +337,10 @@ _.values = (obj) => {
     return result;
 };
 
+_.pairs = () => {
+    return [];
+};
+
 // Utility
 _.identity = (input) => {
     return input;

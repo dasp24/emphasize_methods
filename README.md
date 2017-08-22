@@ -6,6 +6,8 @@ last x
 
 compact x
 
+withput x
+
 initial x
 
 indexOf x

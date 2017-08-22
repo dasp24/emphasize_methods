@@ -871,7 +871,7 @@ describe('_', () => {
         });
     });
 
-    describe.only('_.without', () => {
+    describe('_.without', () => {
         it('exists', () => {
             expect(_.without).to.be.a('function');
         });
@@ -888,7 +888,7 @@ describe('_', () => {
             const arr = [1, 2, 3];
             expect(_.without(arr, 1)).to.eql([2, 3]);
             const arr2 = [1, 4, 88, 34, 5, 8, 9];
-            expect(_.without(arr2, 1, 4, 9)).to.eql([ 88, 34, 5, 8 ]);
+            expect(_.without(arr2, 1, 4, 9)).to.eql([88, 34, 5, 8]);
         });
         it('returns object without values given after first arg', () => {
             const obj = {
@@ -1195,6 +1195,16 @@ describe('_', () => {
         it('returns empty array for num or string', () => {
             expect(_.values(123)).to.eql([]);
             expect(_.values('hello')).to.eql([]);
+        });
+    });
+
+    describe.only('_.pairs', () => {
+        it('exists', () => {
+            expect(_.pairs).to.be.a('function');
+        });
+        it('returns an empty array with invalid format', () => {
+            expect(_.pairs(123)).to.eql([]);
+            expect(_.pairs('123')).to.eql([]);
         });
     });
 
