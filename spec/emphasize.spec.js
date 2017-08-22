@@ -1239,11 +1239,15 @@ describe('_', () => {
         });
     });
 
-    describe.only('_.invert',() => {
-        it('exists',() => {
+    describe.only('_.invert', () => {
+        it('exists', () => {
             expect(_.invert).to.be.a('function');
-        })
-    })
+        });
+        it('only takes valid objects', () => {
+            expect(_.invert(123)).to.eql({});
+            expect(_.invert('hello')).to.eql({});
+        });
+    });
 
     describe('_.identity', () => {
         it('is a function', () => {

@@ -348,7 +348,7 @@ _.pairs = (obj) => {
 };
 
 _.invert = () => {
-
+    return {};
 };
 
 // Utility
