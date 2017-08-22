@@ -1210,12 +1210,27 @@ describe('_', () => {
             const obj = {
                 a: 1,
                 b: 2
-            }
+            };
             expect(_.pairs(obj)).to.eql([
                 ['a', 1],
                 ['b', 2]
             ]);
+            const obj2 = {
+                a: {
+                    c: 'hello'
+                },
+                b: true
+            };
+            expect(_.pairs(obj2)).to.eql([
+                ['a', {
+                    c: 'hello'
+                }],
+                ['b', true]
+            ]);
 
+        });
+        it('works with arrays', () => {
+            expect(_.pairs([1,5,78,9])).to.eql([['0',1], ['1',5], ['2',78], ['3',9]]);
         });
     });
 
