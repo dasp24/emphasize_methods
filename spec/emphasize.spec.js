@@ -1198,7 +1198,7 @@ describe('_', () => {
         });
     });
 
-    describe.only('_.pairs', () => {
+    describe('_.pairs', () => {
         it('exists', () => {
             expect(_.pairs).to.be.a('function');
         });
@@ -1230,9 +1230,20 @@ describe('_', () => {
 
         });
         it('works with arrays', () => {
-            expect(_.pairs([1,5,78,9])).to.eql([['0',1], ['1',5], ['2',78], ['3',9]]);
+            expect(_.pairs([1, 5, 78, 9])).to.eql([
+                ['0', 1],
+                ['1', 5],
+                ['2', 78],
+                ['3', 9]
+            ]);
         });
     });
+
+    describe.only('_.invert',() => {
+        it('exists',() => {
+            expect(_.invert).to.be.a('function');
+        })
+    })
 
     describe('_.identity', () => {
         it('is a function', () => {

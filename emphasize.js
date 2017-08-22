@@ -347,6 +347,10 @@ _.pairs = (obj) => {
     return result;
 };
 
+_.invert = () => {
+
+};
+
 // Utility
 _.identity = (input) => {
     return input;
