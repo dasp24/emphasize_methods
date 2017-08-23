@@ -1239,7 +1239,7 @@ describe('_', () => {
         });
     });
 
-    describe.only('_.invert', () => {
+    describe('_.invert', () => {
         it('exists', () => {
             expect(_.invert).to.be.a('function');
         });
@@ -1274,6 +1274,18 @@ describe('_', () => {
                 hello: '1',
                 noob: '2'
             });
+        });
+    });
+
+    describe.only('_.defaults',() => {
+        it('exists',() => {
+            expect(_.defaults).to.be.a('function');
+        });
+        it('returns input if 1 arg given',() => {
+            expect(_.defaults(123)).to.equal(123);
+            expect(_.defaults('hello')).to.equal('hello');
+            expect(_.defaults([1,2,3])).to.eql([1,2,3]);
+            expect(_.defaults({a:1})).to.eql({a:1});
         });
     });
 

@@ -357,6 +357,10 @@ _.invert = (obj) => {
     return result;
 };
 
+_.defaults = (obj) => {
+    return obj;
+};
+
 // Utility
 _.identity = (input) => {
     return input;
