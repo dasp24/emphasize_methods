@@ -286,6 +286,10 @@ _.uniq = (array) => {
     }, []);
 };
 
+_.object = () => {
+    
+}
+
 _.range = (arg1, arg2, arg3) => {
     const solution = [];
     if (!arg2 && !arg3)

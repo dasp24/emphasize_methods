@@ -899,7 +899,7 @@ describe('_', () => {
         });
     });
 
-    describe.only('_.union', () => {
+    describe('_.union', () => {
         it('exists', () => {
             expect(_.union).to.be.a('function');
         });
@@ -1090,6 +1090,12 @@ describe('_', () => {
                 a: [1, 2, 3]
             }]);
 
+        });
+    });
+
+    describe.only('_.object', () => {
+        it('exists', () => {
+            expect(_.object).to.be.a('function');
         });
     });
 
