@@ -242,10 +242,13 @@ _.without = (arr, ...excluded) => {
     return arr.filter(element => !excluded.includes(element))
 };
 
-_.union = (arr) => {
+_.union = (...arr) => {
     const result = [];
-    arr.forEach((elem) => {
-        if (!result.includes(elem)) result.push(elem)
+    arr.forEach((subArr) => {
+        if (Array.isArray(subArr))
+        subArr.forEach((elem) => {
+            if (!result.includes(elem)) result.push(elem);
+            });
     });
     return result;
 };

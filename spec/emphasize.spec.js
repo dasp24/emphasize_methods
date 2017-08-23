@@ -900,12 +900,24 @@ describe('_', () => {
     });
 
     describe.only('_.union', () => {
-        it('exists',() => {
+        it('exists', () => {
             expect(_.union).to.be.a('function');
         });
-        it('returns unque items in a single given array',() => {
-            const arr = [1,2,3,3]
-            expect(_.union(arr)).to.eql([1,2,3]);
+        it('returns unque items in a single given array', () => {
+            const arr = [1, 2, 3, 3];
+            expect(_.union(arr)).to.eql([1, 2, 3]);
+        });
+        it('returns 1 arr with unque items from all arrs', () => {
+            const arr = [1, 2, 3, 3];
+            const arr2 = ['hello', 'hello'];
+            const arr3 = [1, 5, 52]
+            expect(_.union(arr, arr2, arr3)).to.eql([1, 2, 3, 'hello', 5, 52]);
+        });
+        it('it ignores all non array input', () => {
+            const arr = [1, 2, 3, 3];
+            const arr2 = 'hello';
+            const arr3 = [1, 5, 52];
+            expect(_.union(arr, arr2, arr3)).to.eql([1, 2, 3, 5, 52]);
         });
     });
 
@@ -1344,14 +1356,20 @@ describe('_', () => {
             });
         });
         it('works with arrays', () => {
-            const arr = [1,2,3];
-            expect(_.defaults(arr, {3:'hello'})).to.eql([1,2,3,'hello']);
+            const arr = [1, 2, 3];
+            expect(_.defaults(arr, {
+                3: 'hello'
+            })).to.eql([1, 2, 3, 'hello']);
         });
         it('deals with other input types correctly', () => {
             const str = 'hello';
             const num = 123;
-            expect(_.defaults(str, {3:'hello'})).to.equal(str);
-            expect(_.defaults(num, {3:'hello'})).to.equal(num);
+            expect(_.defaults(str, {
+                3: 'hello'
+            })).to.equal(str);
+            expect(_.defaults(num, {
+                3: 'hello'
+            })).to.equal(num);
         });
     });
 
