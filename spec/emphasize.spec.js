@@ -903,6 +903,10 @@ describe('_', () => {
         it('exists',() => {
             expect(_.union).to.be.a('function');
         });
+        it('returns unque items in a single given array',() => {
+            const arr = [1,2,3,3]
+            expect(_.union(arr)).to.eql([1,2,3]);
+        });
     });
 
     describe('_.flatten', () => {

@@ -242,8 +242,12 @@ _.without = (arr, ...excluded) => {
     return arr.filter(element => !excluded.includes(element))
 };
 
-_.union = () => {
-
+_.union = (arr) => {
+    const result = [];
+    arr.forEach((elem) => {
+        if (!result.includes(elem)) result.push(elem)
+    });
+    return result;
 };
 
 
