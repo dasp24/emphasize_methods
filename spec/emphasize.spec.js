@@ -1097,6 +1097,25 @@ describe('_', () => {
         it('exists', () => {
             expect(_.object).to.be.a('function');
         });
+        it('returns an object of key/value pairs - 1 arg', () => {
+            const arr = [
+                [1, 2],
+                [3, 4]
+            ]
+            expect(_.object(arr)).to.eql({
+                1: 2,
+                3: 4
+            });
+        });
+        it('returns an object of key/value pairs - 2 arg', () => {
+            const arr = ['a', 'b']
+            const arr2 = [3, 4]
+
+            expect(_.object(arr,arr2)).to.eql({
+                a: 3,
+                b: 4
+            });
+        });
     });
 
     describe('_.range', () => {

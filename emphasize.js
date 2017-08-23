@@ -286,9 +286,17 @@ _.uniq = (array) => {
     }, []);
 };
 
-_.object = () => {
-    
-}
+_.object = (arr, arr2) => {
+    const result = {};
+    arr.forEach((elem, index) => {
+        if (!arr2)
+        result[elem[0]] = elem[1];
+        else {
+            result[elem] = arr2[index];
+        }
+    })
+    return result;
+};
 
 _.range = (arg1, arg2, arg3) => {
     const solution = [];
