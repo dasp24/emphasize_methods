@@ -242,6 +242,10 @@ _.without = (arr, ...excluded) => {
     return arr.filter(element => !excluded.includes(element))
 };
 
+_.union = () => {
+
+};
+
 
 _.flatten = (arr, shallow) => {
     const result = [];

@@ -899,6 +899,12 @@ describe('_', () => {
         });
     });
 
+    describe.only('_.union', () => {
+        it('exists',() => {
+            expect(_.union).to.be.a('function');
+        });
+    });
+
     describe('_.flatten', () => {
         it('exists', () => {
             expect(_.flatten).to.be.a('function');
@@ -1277,7 +1283,7 @@ describe('_', () => {
         });
     });
 
-    describe.only('_.defaults', () => {
+    describe('_.defaults', () => {
         it('exists', () => {
             expect(_.defaults).to.be.a('function');
         });
