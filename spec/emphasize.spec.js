@@ -1333,6 +1333,16 @@ describe('_', () => {
                 c: 5
             });
         });
+        it('works with arrays', () => {
+            const arr = [1,2,3];
+            expect(_.defaults(arr, {3:'hello'})).to.eql([1,2,3,'hello']);
+        });
+        it('deals with other input types correctly', () => {
+            const str = 'hello';
+            const num = 123;
+            expect(_.defaults(str, {3:'hello'})).to.equal(str);
+            expect(_.defaults(num, {3:'hello'})).to.equal(num);
+        });
     });
 
     describe('_.identity', () => {
