@@ -1268,7 +1268,7 @@ describe('_', () => {
             });
         });
         it('also works for arrays', () => {
-            const arr = [1,'hello','noob']
+            const arr = [1, 'hello', 'noob']
             expect(_.invert(arr)).to.eql({
                 1: '0',
                 hello: '1',
@@ -1277,15 +1277,44 @@ describe('_', () => {
         });
     });
 
-    describe.only('_.defaults',() => {
-        it('exists',() => {
+    describe.only('_.defaults', () => {
+        it('exists', () => {
             expect(_.defaults).to.be.a('function');
         });
-        it('returns input if 1 arg given',() => {
+        it('returns input if 1 arg given', () => {
             expect(_.defaults(123)).to.equal(123);
             expect(_.defaults('hello')).to.equal('hello');
-            expect(_.defaults([1,2,3])).to.eql([1,2,3]);
-            expect(_.defaults({a:1})).to.eql({a:1});
+            expect(_.defaults([1, 2, 3])).to.eql([1, 2, 3]);
+            expect(_.defaults({
+                a: 1
+            })).to.eql({
+                a: 1
+            });
+        });
+        it('adds new key/value pair if it doesnt already exist', () => {
+            const obj = {
+                a: 1,
+                b: 'hello'
+            }
+            expect(_.defaults(obj, {
+                c: 'world'
+            })).to.eql({
+                a: 1,
+                b: 'hello',
+                c: 'world'
+            });
+        });
+        it('doesnt change original value if key exists already', () => {
+            const obj = {
+                a: 1,
+                b: 'hello'
+            }
+            expect(_.defaults(obj, {
+                a: 'world'
+            })).to.eql({
+                a: 1,
+                b: 'hello',
+            });
         });
     });
 

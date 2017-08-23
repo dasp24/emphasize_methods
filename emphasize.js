@@ -357,7 +357,11 @@ _.invert = (obj) => {
     return result;
 };
 
-_.defaults = (obj) => {
+_.defaults = (obj, defaults) => {
+    if (!defaults) return obj;
+    for (let key in defaults) {
+        if (!obj[key]) obj[key] = defaults[key];
+    }
     return obj;
 };
 
