@@ -1316,6 +1316,23 @@ describe('_', () => {
                 b: 'hello',
             });
         });
+        it('checks multiple defaults', () => {
+            const obj = {
+                a: 1,
+                b: 'hello'
+            };
+            expect(_.defaults(obj, {
+                a: 'world'
+            }, {
+                c: 5
+            }, {
+                b: 'boom'
+            })).to.eql({
+                a: 1,
+                b: 'hello',
+                c: 5
+            });
+        });
     });
 
     describe('_.identity', () => {
