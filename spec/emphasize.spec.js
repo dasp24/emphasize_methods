@@ -1111,8 +1111,17 @@ describe('_', () => {
             const arr = ['a', 'b']
             const arr2 = [3, 4]
 
-            expect(_.object(arr,arr2)).to.eql({
+            expect(_.object(arr, arr2)).to.eql({
                 a: 3,
+                b: 4
+            });
+        });
+        it('if duplicate key exists, the last value wins', () => {
+            const arr = ['a', 'b', 'a'];
+            const arr2 = [3, 4, 5];
+
+            expect(_.object(arr, arr2)).to.eql({
+                a: 5,
                 b: 4
             });
         });

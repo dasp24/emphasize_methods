@@ -294,7 +294,7 @@ _.object = (arr, arr2) => {
         else {
             result[elem] = arr2[index];
         }
-    })
+    });
     return result;
 };
 
