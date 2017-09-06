@@ -32,7 +32,7 @@ Chai
 Nodejs
 
 ## Methods
-# collections
+## collections
 each
 
 map
@@ -63,7 +63,7 @@ toArray
 
 partition
 
-#Arrays
+##Arrays
 first 
 
 initial
@@ -90,7 +90,7 @@ memoize
 
 once
 
-#Objects
+##Objects
 keys
 
 values
@@ -101,7 +101,7 @@ invert
 
 defaults
 
-#Utility
+##Utility
 
 identity
 
