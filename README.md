@@ -26,17 +26,25 @@ I have extensively tested all the functions listed below, however if you spot an
 
 ## Built With
 Mocha
+
 Chai
+
 Nodejs
 
 ## Methods
 ## collections
 each
+
 map
+
 reduce
+
 find
+
 filter
+
 where
+
 reject
 
 every
