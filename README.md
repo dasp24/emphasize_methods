@@ -1,59 +1,112 @@
 # underscore/emphasize
+The functions found in my emphasize.js file are my version or underscore/lodash. They can be viewed and implemented in a similar way to the above mentioned libraries.
 
-first x 
+If you would like to view/use the code locally first you will need to have the current version of node v6.11.3 is the version I am currently running.
 
-last x
+Double check you have this installed by running ``node -v`` in your terminal.
 
-compact x
+You can always download the latest version <a href="https://nodejs.org/en/download/">here</a>.
 
-withput x
+Follow these steps to set up this project locally:
 
-initial x
+`git clone https://github.com/dasp24/emphasize_methods.git`
 
-indexOf x
+`cd emphasize_methods`
 
-contains x
+`npm install`
 
-keys x
 
-values x
+## Running tests
 
-each x
+if you would like to run the tests I have used to test functionality please do ``npm test``.
 
-map x
+All my tests have been done using mocha and chai.
 
-reduce x
+I have extensively tested all the functions listed below, however if you spot any errors or even see a good refactor please let me know. 
 
-find x
+## Built With
+Mocha
 
-filter x
+Chai
 
-every x
+Nodejs
 
-flatten x
+## Methods
+# collections
+each
 
-identity x
+map
 
-toArray x
+reduce
 
-partition x
+find
 
-random x
+filter
 
-invoke x
+where
 
-range x
+reject
 
-where x
+every
 
-reject x
+contains
 
-uniq x
+some
 
-once x
+invoke
 
-memoize x
+pluck
 
-shuffle x
+shuffle
 
-some x
+toArray
+
+partition
+
+#Arrays
+first 
+
+initial
+
+last 
+
+compact 
+
+without 
+
+union
+
+flatten 
+
+indexOf
+
+uniq
+
+object
+
+range
+
+memoize
+
+once
+
+#Objects
+keys
+
+values
+
+pairs
+
+invert
+
+defaults
+
+#Utility
+
+identity
+
+random
+
+## Author
+Daniel Parkes
+
